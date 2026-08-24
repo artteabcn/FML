@@ -5,11 +5,76 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="FML Group — Finance, Maritime, Logistique. Mauritius and West Africa.">
-    <meta name="author" content="">
+    <meta name="description" content="FML Group is a diversified holding company operating across Finance, Maritime and Logistique from Port Louis, Mauritius, with operations extending into West Africa.">
+    <meta name="author" content="FML Group">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical / placeholder domain — update once the real domain is live on Cloudflare -->
+    <link rel="canonical" href="https://www.fmlgroup.example/">
+    <!-- hreflang here is a placeholder: with a single-page JS language toggle (no
+         separate /en/ and /fr/ URLs), hreflang carries no real SEO signal to
+         search engines. The Astro rebuild should serve EN/FR on distinct routes
+         and set these properly at that point. -->
+    <link rel="alternate" hreflang="en" href="https://www.fmlgroup.example/">
+    <link rel="alternate" hreflang="fr" href="https://www.fmlgroup.example/">
+    <link rel="alternate" hreflang="x-default" href="https://www.fmlgroup.example/">
+
+    <!-- llms.txt: machine-readable summary for AI crawlers -->
+    <link rel="llms" href="/llms.txt">
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
 
-    <title>FML Group</title>
+    <title>FML Group — Finance, Maritime &amp; Logistique | Mauritius &amp; West Africa</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="FML Group">
+    <meta property="og:title" content="FML Group — Finance, Maritime &amp; Logistique">
+    <meta property="og:description" content="A diversified holding company operating across Finance, Maritime and Logistique from Port Louis, Mauritius, with operations extending into West Africa.">
+    <meta property="og:url" content="https://www.fmlgroup.example/">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1590496793907-4d66e2994b4d?fm=jpg&amp;q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+    <meta property="og:locale" content="en">
+    <meta property="og:locale:alternate" content="fr">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FML Group — Finance, Maritime &amp; Logistique">
+    <meta name="twitter:description" content="A diversified holding company operating across Finance, Maritime and Logistique from Port Louis, Mauritius, with operations extending into West Africa.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1590496793907-4d66e2994b4d?fm=jpg&amp;q=80&amp;w=1200&amp;auto=format&amp;fit=crop">
+
+    <!-- JSON-LD structured data — Organization, using real certificate data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "FML Group",
+      "alternateName": "FML Capital Ltd",
+      "legalName": "FML Capital Ltd",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "Mauritius Company Number",
+        "value": "234759"
+      },
+      "foundingDate": "2026-05-18",
+      "foundingLocation": {
+        "@type": "Place",
+        "name": "Port Louis, Mauritius"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Port Louis",
+        "addressCountry": "MU"
+      },
+      "url": "https://www.fmlgroup.example/",
+      "knowsAbout": ["Finance", "Maritime registry", "Fisheries", "Port logistics", "Mining logistics", "Cement logistics"],
+      "areaServed": [
+        { "@type": "Country", "name": "Mauritius" },
+        { "@type": "Place", "name": "West Africa" }
+      ]
+    }
+    </script>
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -23,10 +88,11 @@
 
     </head>
 
+
     <body>
 
     <div id="video">
-        <div class="placeholder-note" data-i18n="note.placeholder">FML Group · placeholder content &amp; illustrations</div>
+        <div class="placeholder-note" data-i18n="note.placeholder">FML Group · placeholder content, photography via Unsplash &amp; original illustrations</div>
         <div class="preloader">
             <div class="preloader-bounce">
                 <span></span>
@@ -65,6 +131,8 @@
              hero looks correct with or without footage. Add licensed video with:
              <source src="images/hero-bg.mp4" type="video/mp4"> -->
         <video autoplay muted loop id="myVideo"></video>
+
+        <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1590496793907-4d66e2994b4d?fm=jpg&amp;q=80&amp;w=2400&amp;auto=format&amp;fit=crop')" aria-hidden="true"></div>
 
         <div class="hero-illustration" aria-hidden="true">
             <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
@@ -135,41 +203,27 @@
                                     </div>
                                     <div class="col-md-6">
                                         <figure class="about-img animate" data-animate="fadeInUp">
-                                            <div class="illustration-box" aria-label="FML Group — original illustration combining skyline, capital markets and coastline">
+                                            <div class="illustration-box" aria-label="FML Group — skyline and coastline, illustration over Unsplash photography" style="background-image:url('https://images.unsplash.com/photo-1627327053419-fe894c4650ed?fm=jpg&amp;q=80&amp;w=1600&amp;auto=format&amp;fit=crop'); background-size:cover; background-position:center;">
                                                 <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
                                                     <defs>
                                                         <linearGradient id="gAbout" x1="0" y1="0" x2="1" y2="1">
                                                             <stop offset="0%" stop-color="#4096ee"/>
                                                             <stop offset="100%" stop-color="#39ced6"/>
                                                         </linearGradient>
-                                                        <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
-                                                            <stop offset="0%" stop-color="#2f3134"/>
-                                                            <stop offset="100%" stop-color="#232426"/>
-                                                        </linearGradient>
                                                     </defs>
-                                                    <rect width="400" height="400" fill="url(#gSky)"/>
+                                                    <rect width="400" height="400" fill="#1c1d1f" opacity=".35"/>
 
-                                                    <!-- skyline -->
-                                                    <g fill="#3a3b3e">
-                                                        <rect x="20" y="200" width="34" height="130"/>
-                                                        <rect x="60" y="160" width="28" height="170"/>
-                                                        <rect x="94" y="220" width="30" height="110"/>
-                                                        <rect x="130" y="120" width="26" height="210"/>
-                                                        <rect x="162" y="190" width="32" height="140"/>
-                                                    </g>
-
-                                                    <!-- financial line rising through the skyline -->
+                                                    <!-- financial line rising over the photo -->
                                                     <polyline points="20,260 65,230 100,245 140,175 185,205 230,140" fill="none" stroke="url(#gAbout)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                                                     <circle cx="230" cy="140" r="6" fill="#39ced6"/>
 
-                                                    <!-- coastline -->
-                                                    <path d="M0 330 Q60 315 120 330 T240 330 T360 330 L400 330 L400 400 L0 400 Z" fill="#1c1d1f"/>
-                                                    <path d="M0 340 Q60 325 120 340 T240 340 T360 340 T400 340" fill="none" stroke="url(#gAbout)" stroke-width="1.5" opacity=".5"/>
+                                                    <!-- coastline accent -->
+                                                    <path d="M0 340 Q60 325 120 340 T240 340 T360 340 T400 340" fill="none" stroke="url(#gAbout)" stroke-width="1.5" opacity=".7"/>
 
                                                     <!-- vessel -->
-                                                    <path d="M280 320 L360 320 L348 345 L292 345 Z" fill="#2f3134" stroke="#4a4b4e" stroke-width="1"/>
-                                                    <line x1="320" y1="290" x2="320" y2="320" stroke="#5a5b5e" stroke-width="2"/>
-                                                    <path d="M321 292 L345 306 L321 306 Z" fill="url(#gAbout)" opacity=".7"/>
+                                                    <path d="M280 320 L360 320 L348 345 L292 345 Z" fill="#2f3134" stroke="#5a5b5e" stroke-width="1"/>
+                                                    <line x1="320" y1="290" x2="320" y2="320" stroke="#8a8b8e" stroke-width="2"/>
+                                                    <path d="M321 292 L345 306 L321 306 Z" fill="url(#gAbout)" opacity=".85"/>
 
                                                     <!-- coordinate marks -->
                                                     <circle cx="330" cy="80" r="4" fill="#4096ee"/>
@@ -197,6 +251,7 @@
                             <div class="services-section">
                                 <div class="services-list owl-carousel">
                                     <div class="item animate" data-animate="fadeInUp">
+                                        <div class="cluster-photo" style="background-image:url('https://images.unsplash.com/photo-1499566727020-881da110a0b0?fm=jpg&amp;q=80&amp;w=1600&amp;auto=format&amp;fit=crop')" aria-hidden="true"></div>
                                         <div class="cluster-illustration" aria-hidden="true">
                                             <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
                                                 <polyline points="20,300 70,250 120,270 170,180 220,210 280,120" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -215,6 +270,7 @@
                                         </div>
                                     </div>
                                     <div class="item animate" data-animate="fadeInUp">
+                                        <div class="cluster-photo" style="background-image:url('https://images.unsplash.com/photo-1606185540834-d6e7483ee1a4?fm=jpg&amp;q=80&amp;w=1600&amp;auto=format&amp;fit=crop')" aria-hidden="true"></div>
                                         <div class="cluster-illustration" aria-hidden="true">
                                             <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
                                                 <circle cx="230" cy="80" r="30" fill="none" stroke="#fff" stroke-width="2"/>
@@ -234,6 +290,7 @@
                                         </div>
                                     </div>
                                     <div class="item animate" data-animate="fadeInUp">
+                                        <div class="cluster-photo" style="background-image:url('https://images.unsplash.com/photo-1601897690942-bcacbad33e55?fm=jpg&amp;q=80&amp;w=1600&amp;auto=format&amp;fit=crop')" aria-hidden="true"></div>
                                         <div class="cluster-illustration" aria-hidden="true">
                                             <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
                                                 <line x1="60" y1="40" x2="60" y2="260" stroke="#fff" stroke-width="3"/>

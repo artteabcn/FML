@@ -11,17 +11,42 @@
   position:relative;
   overflow:hidden;
 }
+.cluster-photo{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background-size:cover;
+  background-position:center;
+  filter:saturate(.8) brightness(.55);
+}
 .cluster-illustration{
   position:absolute;
   inset:0;
   z-index:0;
-  opacity:.22;
+  opacity:.5;
   pointer-events:none;
   transition:opacity .5s ease;
 }
-.services-list .item:hover .cluster-illustration{ opacity:.14; }
+.services-list .item:hover .cluster-illustration{ opacity:.3; }
 .cluster-illustration svg{ width:100%; height:100%; display:block; }
 .service-box{ position:relative; z-index:1; }
+.services-list .item:hover{
+  color:#fff;
+}
+.services-list .item:hover .service-box,
+.services-list .item:hover .service-box h3,
+.services-list .item:hover .service-box p{
+  color:#fff;
+}
+
+.hero-photo{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background-size:cover;
+  background-position:center;
+  filter:saturate(.85) brightness(.75);
+}
 
 .hero-illustration{
   position:absolute;

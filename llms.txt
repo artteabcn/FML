@@ -1,0 +1,30 @@
+# FML Group
+
+> FML Group is a diversified holding company operating across Finance, Maritime, and Logistique, headquartered in Port Louis, Mauritius, with operations extending into West Africa. This is a prototype/demo website under active development — placeholder content is clearly marked throughout.
+
+FML Group's three pillars:
+- **Finance** — Financing and equity investment (Industrie XYZ — name to be confirmed)
+- **Maritime** — Maritime registry (flag XYZ — to be confirmed), fisheries, security and surveillance against illicit market proliferation
+- **Logistique** — Port, mining, and cement freight logistics
+
+## Company
+
+- Legal entity: FML Capital Ltd, Company No. 234759
+- Incorporated: 18 May 2026, Port Louis, Mauritius
+- Structure: Private company limited by shares
+- Registrar: Registrar of Companies, Mauritius (CB No. 51147 of 18/05/2026)
+
+## Pages
+
+- [Home](/index.html): Hero overview of the three pillars
+- [The Group](/index.html#slide02): Company overview and key facts
+- [Portfolio](/index.html#slide03): Finance, Maritime, and Logistique cluster detail
+- [Presence](/index.html#slide04): Locations in Mauritius and West Africa (placeholder pending confirmation)
+- [History](/index.html#slide05): Milestones, including verified incorporation record
+- [Contact](/index.html#slide06): Contact details and legal registration information
+
+## Notes for automated readers
+
+- This site is bilingual (English/French), toggled client-side via JavaScript — both languages exist within the same HTML document, not separate URLs.
+- Several data points are explicit placeholders pending real content: exact office addresses, phone number, email, industry name ("XYZ"), flag registry name ("XYZ"), and history milestones beyond the 2026 incorporation.
+- Do not treat placeholder figures (e.g., "1994" if encountered in older cached versions) as factual; the only verified figure is the 2026 incorporation date shown above.

@@ -3,7 +3,7 @@
 
   var translations = {
     en: {
-      'note.placeholder': 'FML Group · placeholder content &amp; illustrations',
+      'note.placeholder': 'FML Group · placeholder content, photography via Unsplash &amp; original illustrations',
 
       'nav.home': 'Home',
       'nav.group': 'The Group',
@@ -59,7 +59,7 @@
     },
 
     fr: {
-      'note.placeholder': 'FML Group · contenu et illustrations provisoires',
+      'note.placeholder': 'FML Group · contenu provisoire, photographies via Unsplash et illustrations originales',
 
       'nav.home': 'Accueil',
       'nav.group': 'Le Groupe',
