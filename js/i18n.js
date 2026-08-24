@@ -14,7 +14,6 @@
 
       'hero.eyebrow': 'Finance, Maritime, Logistics',
       'hero.body': "From Port Louis to the West African coast, FML Group finances industry, commands the sea, and keeps the region's trade moving — three pillars, one group.",
-      'hero.scroll': 'Scroll Down',
 
       'group.eyebrow': 'The Group',
       'group.h2': 'Three pillars, one direction',
@@ -70,7 +69,6 @@
 
       'hero.eyebrow': 'Finance, Maritime, Logistique',
       'hero.body': "De Port Louis à la côte ouest-africaine, FML Group finance l'industrie, commande la mer et fait circuler le commerce régional — trois piliers, un seul groupe.",
-      'hero.scroll': 'Défiler',
 
       'group.eyebrow': 'Le Groupe',
       'group.h2': 'Trois piliers, une direction',

@@ -158,7 +158,6 @@
                         <span class="welcome-first animate" data-animate="fadeInUp" data-i18n="hero.eyebrow">Finance, Maritime, Logistics</span>
                         <h1 class="welcome-title animate" data-animate="fadeInUp">FML Group</h1>
                         <p class="animate" data-animate="fadeInUp" data-i18n="hero.body">From Port Louis to the West African coast, FML Group finances industry, commands the sea, and keeps the region's trade moving — three pillars, one group.</p>
-                        <div class="scroll-down next-section animate" data-animate="fadeInUp"><img src="images/mouse-scroll.png" alt=""><span data-i18n="hero.scroll">Scroll Down</span></div>
                     </div>
                 </div>
             </div>
@@ -485,6 +484,17 @@
                 </ul>
             </div>
         </div>
+
+        <button id="scrollProgressBtn" class="scroll-progress-btn" aria-label="Scroll to top" title="Back to top">
+            <svg viewBox="0 0 56 56" class="progress-ring" aria-hidden="true">
+                <circle class="progress-ring-bg" cx="28" cy="28" r="24"></circle>
+                <circle id="scrollProgressFill" class="progress-ring-fill" cx="28" cy="28" r="24"></circle>
+            </svg>
+            <span class="progress-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            </span>
+            <span class="progress-percent" id="scrollProgressPercent">0%</span>
+        </button>
     </div>
 
     <script src="js/jquery.js"></script>
@@ -494,6 +504,7 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.inview.min.js"></script>
     <script src="js/form.js"></script>
+    <script src="js/scroll-progress.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/i18n.js"></script>
 

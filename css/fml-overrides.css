@@ -1,12 +1,6 @@
 /* FML Group additions — kept separate from the theme's own CSS files
    so the original template styling stays fully intact and upgradeable. */
 
-.next-section{
-  bottom:auto;
-  top:100%;
-  margin-top:24px;
-}
-
 .services-list .item{
   position:relative;
   overflow:hidden;
@@ -102,6 +96,97 @@
   line-height:1.7;
   text-align:left;
   color:rgba(255,255,255,.75);
+}
+
+@media (max-width:767px){
+  #header{
+    background-color: rgba(20,21,23,.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  #logo{ color:#fff !important; }
+  #navigation button i{ color:#fff !important; }
+  .navigation-menu > li > a{ color:#fff !important; }
+  .navigation-menu > li.active > a,
+  .navigation-menu > li > a:hover{ color:#39ced6 !important; }
+  .nav-box{
+    background: rgba(20,21,23,.98) !important;
+    min-height:100vh;
+  }
+  .navbar-nav{
+    background: transparent !important;
+  }
+}
+
+.scroll-progress-btn{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:500;
+  width:56px;
+  height:56px;
+  border:none;
+  border-radius:50%;
+  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(4px);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  transition:background .3s ease, transform .3s ease;
+}
+.scroll-progress-btn:hover{
+  background:rgba(0,0,0,.6);
+  transform:translateY(-2px);
+}
+.progress-ring{
+  position:absolute;
+  inset:0;
+  width:56px;
+  height:56px;
+  transform:rotate(-90deg);
+}
+.progress-ring-bg{
+  fill:none;
+  stroke:rgba(255,255,255,.25);
+  stroke-width:3;
+}
+.progress-ring-fill{
+  fill:none;
+  stroke:#39ced6;
+  stroke-width:3;
+  stroke-linecap:round;
+  transition:stroke-dashoffset .5s cubic-bezier(.16,1,.3,1);
+}
+.progress-arrow{
+  position:relative;
+  z-index:1;
+  color:#fff;
+  width:16px;
+  height:16px;
+  display:flex;
+}
+.progress-arrow svg{ width:100%; height:100%; }
+.progress-percent{
+  position:absolute;
+  bottom:-22px;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:'Raleway', sans-serif;
+  font-size:11px;
+  font-weight:600;
+  color:rgba(255,255,255,.75);
+  white-space:nowrap;
+}
+@media (max-width:768px){
+  .scroll-progress-btn{
+    right:16px;
+    bottom:16px;
+    width:46px;
+    height:46px;
+  }
+  .progress-ring{ width:46px; height:46px; }
 }
 
 .social-icons li a.lang-link{

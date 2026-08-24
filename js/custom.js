@@ -153,6 +153,7 @@
             });
         }
         if ($('.fullpage-default').length) {
+            var fmlTotalSections = $('.fullpage-default .section').length;
             var myFullpage = new fullpage('.fullpage-default', {
                 licenseKey: ' C7F41B00-5E824594-9A5EFB99-B556A3D5',
                 anchors: ['slide01', 'slide02', 'slide03', 'slide04', 'slide05', 'slide06'],
@@ -163,7 +164,17 @@
                 scrollOverflow: true,
                 responsiveWidth: 768,
                 responsiveHeight: 600,
-                responsiveSlides: true
+                responsiveSlides: true,
+                afterRender: function () {
+                    if (window.FMLUpdateScrollProgress) {
+                        window.FMLUpdateScrollProgress(0, fmlTotalSections);
+                    }
+                },
+                afterLoad: function (origin, destination) {
+                    if (window.FMLUpdateScrollProgress) {
+                        window.FMLUpdateScrollProgress(destination.index, fmlTotalSections);
+                    }
+                }
             });
         }
         $(document).on('click', '.navbar-toggle', function() {
