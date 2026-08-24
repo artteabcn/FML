@@ -48,8 +48,8 @@
 
       'contact.eyebrow': 'Contact',
       'contact.h2': "Let's talk",
-      'contact.address': 'Port Louis, Mauritius (placeholder address)',
-      'contact.legal': 'FML Capital Ltd — Company No. 234759<br>Private Company Limited by Shares<br>Incorporated 18 May 2026, Port Louis, Mauritius',
+      'contact.address': 'Port Louis, Mauritius',
+      'contact.legal': 'FML Capital Ltd — Company No. 234759<br>Private Company Limited by Shares<br>Incorporated 18 May 2026',
 
       'form.name': 'Name',
       'form.email': 'Email',
@@ -103,8 +103,8 @@
 
       'contact.eyebrow': 'Contact',
       'contact.h2': 'Parlons-en',
-      'contact.address': 'Port Louis, Maurice (adresse à confirmer)',
-      'contact.legal': 'FML Capital Ltd — N° de société 234759<br>Société privée à responsabilité limitée par actions<br>Constituée le 18 mai 2026, Port Louis, Maurice',
+      'contact.address': 'Port Louis, Maurice',
+      'contact.legal': 'FML Capital Ltd — N° de société 234759<br>Société privée à responsabilité limitée par actions<br>Constituée le 18 mai 2026',
 
       'form.name': 'Nom',
       'form.email': 'E-mail',
