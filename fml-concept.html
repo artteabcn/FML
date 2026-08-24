@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FML Group — Visual Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #222222;
+    --bg-2: #2a2a2a;
+    --ivory: #FFFFFF;
+    --ivory-dim: #c2c2c2;
+    --brass: #4096ee;
+    --brass-dim: #2c6db8;
+    --oxide: #39ced6;
+    --teal: #39ced6;
+    --teal-dim: #1f8a90;
+    --rule: rgba(255,255,255,.14);
+    --card-bg: #2a2a2a;
+    --accent-gradient: linear-gradient(180deg, #4096ee 0%, #39ced6 100%);
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--ivory);
+    font-family:'Raleway',sans-serif;
+    overflow-x:hidden;
+    cursor:default;
+  }
+  ::selection{ background:var(--brass); color:var(--bg); }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .mono{ font-family:'Raleway',sans-serif; letter-spacing:.14em; text-transform:uppercase; font-weight:500; }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 48px;
+    mix-blend-mode:difference;
+  }
+  .logo{
+    font-family:'Raleway',sans-serif; font-weight:500; font-size:20px;
+    letter-spacing:.02em;
+  }
+  .logo span{ color:var(--brass); }
+  .header-right{ display:flex; align-items:center; gap:36px; }
+  nav.desktop-nav{ display:flex; gap:30px; }
+  nav.desktop-nav a{
+    font-size:12px; text-transform:uppercase; letter-spacing:.1em;
+    color:var(--ivory-dim); position:relative; padding-bottom:4px;
+    transition:color .35s ease; white-space:nowrap;
+  }
+  nav.desktop-nav a:hover{ color:var(--ivory); }
+  nav.desktop-nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--brass); transition:width .4s cubic-bezier(.16,1,.3,1);
+  }
+  nav.desktop-nav a:hover::after{ width:100%; }
+  @media (max-width:1180px){ nav.desktop-nav{ display:none; } }
+
+  .lang-switch{
+    display:flex; align-items:center; gap:8px; font-size:12px;
+    font-family:'Raleway',sans-serif; letter-spacing:.04em;
+  }
+  .lang-switch button{
+    background:none; border:none; color:var(--ivory-dim); cursor:pointer;
+    padding:2px 0; transition:color .3s ease;
+  }
+  .lang-switch button.active{ color:var(--ivory); border-bottom:1px solid var(--brass); }
+  .lang-switch .sep{ color:var(--rule); }
+
+  .menu-btn{
+    display:none; flex-direction:column; justify-content:center; gap:5px;
+    width:32px; height:24px; background:none; border:none; cursor:pointer; padding:0;
+  }
+  .menu-btn span{ display:block; width:100%; height:1px; background:var(--ivory); transition:transform .35s ease, opacity .35s ease; }
+  @media (max-width:1180px){ .menu-btn{ display:flex; } }
+
+  .mobile-menu{
+    position:fixed; inset:0; z-index:99; background:var(--bg);
+    display:flex; flex-direction:column; justify-content:center; padding:48px;
+    opacity:0; pointer-events:none; transition:opacity .4s ease;
+  }
+  .mobile-menu.open{ opacity:1; pointer-events:auto; }
+  .mobile-menu a{
+    font-family:'Raleway',sans-serif; font-size:clamp(28px,7vw,42px); font-weight:400;
+    padding:14px 0; border-bottom:1px solid var(--rule); display:flex; align-items:center; gap:16px;
+    color:var(--ivory);
+  }
+  .mobile-menu a .num{ font-family:'Raleway',sans-serif; font-size:13px; color:var(--brass-dim); }
+  .mobile-menu .lang-switch{ margin-top:32px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; height:100svh; min-height:640px;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:0 48px 64px;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute; inset:0; z-index:0; background:#070809;
+  }
+  #heroVideo{
+    position:absolute; inset:0; z-index:0; width:100%; height:100%;
+    object-fit:cover; opacity:0; display:none;
+  }
+  #heroVideo.has-source{ opacity:1; display:block; }
+  #heroCanvas{ position:absolute; inset:0; z-index:0; width:100%; height:100%; opacity:.55; transition:opacity .6s ease; }
+  #heroCanvas.hide{ opacity:0; }
+  .hero-scrim{
+    position:absolute; inset:0; z-index:1;
+    background:
+      linear-gradient(180deg, rgba(7,8,9,.55) 0%, rgba(7,8,9,.35) 40%, rgba(7,8,9,.85) 100%),
+      radial-gradient(ellipse 70% 50% at 78% 85%, rgba(46,92,90,.22), transparent 60%);
+  }
+  .video-tag{
+    position:absolute; top:120px; right:48px; z-index:3;
+    font-family:'Raleway',sans-serif; font-size:10px; color:var(--ivory-dim);
+    border:1px solid var(--rule); padding:5px 10px; border-radius:3px; opacity:.7;
+  }
+  @media (max-width:980px){ .video-tag{ display:none; } }
+  .hero-grid{
+    position:absolute; inset:0; z-index:1; opacity:.35;
+    background-image:
+      linear-gradient(rgba(237,232,223,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237,232,223,.05) 1px, transparent 1px);
+    background-size:64px 64px;
+    animation:driftGrid 60s linear infinite;
+  }
+  @keyframes driftGrid{ from{ background-position:0 0,0 0; } to{ background-position:64px 128px, 64px 128px; } }
+
+  .hero-noise{
+    position:absolute; inset:0; z-index:2; pointer-events:none; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .coord-ticker{
+    position:absolute; top:120px; left:48px; right:48px; z-index:3;
+    display:flex; justify-content:space-between; font-size:11px;
+    color:var(--ivory-dim); opacity:.7;
+  }
+  .coord-ticker .divider{ flex:1; height:1px; background:var(--rule); margin:0 20px; align-self:center; }
+  @media (max-width:980px){ .coord-ticker{ display:none; } }
+
+  .hero-eyebrow{
+    position:relative; z-index:3;
+    font-size:12px; text-transform:uppercase; letter-spacing:.2em;
+    color:var(--brass); margin-bottom:22px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .hero-eyebrow::before{ content:''; width:28px; height:1px; background:var(--brass); }
+
+  h1.hero-title{
+    position:relative; z-index:3;
+    font-family:'Raleway',sans-serif; font-weight:400; font-style:normal;
+    font-size:clamp(48px,8vw,124px); line-height:.98; letter-spacing:-.01em;
+    max-width:16ch;
+  }
+  h1.hero-title em{
+    font-style:italic; font-weight:300;
+    background:var(--accent-gradient); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  .hero-foot{
+    position:relative; z-index:3;
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-top:40px; gap:24px; flex-wrap:wrap;
+  }
+  .hero-desc{ max-width:36ch; font-size:15px; line-height:1.7; color:var(--ivory-dim); font-weight:300; }
+  .cta-btn{
+    display:inline-flex; align-items:center; gap:10px; margin-top:20px;
+    padding:13px 26px; border-radius:2px; border:none; cursor:pointer;
+    background:var(--accent-gradient); color:#fff; font-family:'Raleway',sans-serif;
+    font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
+    transition:transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease;
+  }
+  .cta-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(64,150,238,.35); }
+  .hero-scroll{
+    display:flex; align-items:center; gap:12px; font-size:11px;
+    text-transform:uppercase; letter-spacing:.15em; color:var(--ivory-dim);
+  }
+  .scroll-line{ width:1px; height:44px; background:linear-gradient(var(--brass), transparent); position:relative; overflow:hidden; }
+  .scroll-line::after{
+    content:''; position:absolute; top:-44px; left:0; width:100%; height:44px;
+    background:var(--ivory); animation:scrollDrop 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollDrop{ 0%{ top:-44px; } 60%{ top:44px; } 100%{ top:44px; } }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee-wrap{
+    border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    padding:18px 0; background:var(--bg-2); overflow:hidden;
+  }
+  .marquee{ display:flex; white-space:nowrap; animation:marquee 34s linear infinite; width:max-content; }
+  .marquee span{
+    font-family:'Raleway',sans-serif; font-size:13px; color:var(--ivory-dim);
+    padding:0 28px; display:flex; align-items:center; gap:28px;
+  }
+  .marquee span::after{ content:'—'; color:var(--brass-dim); }
+  @keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+  /* ---------- SECTORS ---------- */
+  .sectors{ padding:110px 48px 60px; }
+  .sectors-head{ margin-bottom:56px; }
+  .sectors-head .mono{ font-size:12px; color:var(--brass); }
+  .sectors-head h2{
+    font-family:'Raleway',sans-serif; font-weight:400; font-size:clamp(30px,4vw,48px);
+    margin-top:10px; max-width:16ch;
+  }
+  .sector-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:24px; }
+  .sector-card.wide{ grid-column:span 1; }
+  @media (min-width:1400px){ .sector-grid{ grid-template-columns:repeat(3, 1fr); } }
+  .sub-list{ list-style:none; margin-top:6px; padding:0; }
+  .sub-list li{
+    font-size:12.5px; color:var(--ivory-dim); line-height:1.6; font-weight:300;
+    padding-left:16px; position:relative; margin-bottom:6px;
+  }
+  .sub-list li::before{
+    content:''; position:absolute; left:0; top:8px; width:6px; height:1px; background:var(--brass-dim);
+  }
+  .placeholder-tag{
+    font-family:'Raleway',sans-serif; font-size:10px; color:var(--brass-dim);
+    border:1px solid var(--rule); padding:2px 6px; border-radius:2px; margin-left:6px;
+  }
+  .sector-card{
+    background:var(--card-bg); border:1px solid var(--rule); border-radius:2px;
+    overflow:hidden; position:relative;
+    opacity:0; transform:translateY(24px);
+    transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+  }
+  .sector-card.in-view{ opacity:1; transform:translateY(0); }
+  .sector-photo{
+    position:relative; aspect-ratio:16/10; overflow:hidden;
+  }
+  .sector-photo img{ display:none; }
+  .photo-placeholder{
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, #2c2d30 0%, #1c1d1f 100%);
+  }
+  .photo-placeholder svg{ width:100%; height:100%; display:block; }
+  .sector-card:hover .photo-placeholder svg{ transform:scale(1.04); transition:transform .7s cubic-bezier(.16,1,.3,1); }
+  .sector-photo::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(34,34,34,.05), rgba(34,34,34,.8));
+  }
+  .sector-icon{
+    position:absolute; bottom:18px; left:20px; z-index:2;
+    width:46px; height:46px; border-radius:50%; background:var(--bg);
+    border:1px solid var(--brass-dim);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .sector-icon svg{ width:22px; height:22px; stroke:var(--brass); fill:none; stroke-width:1.4; }
+  .sector-body{ padding:26px 26px 30px; }
+  .sector-body .tag{ font-size:11px; text-transform:uppercase; letter-spacing:.14em; color:var(--brass-dim); }
+  .sector-body h3{
+    font-family:'Raleway',sans-serif; font-weight:400; font-size:26px; margin:10px 0 12px;
+  }
+  .sector-body p{ font-size:13.5px; color:var(--ivory-dim); line-height:1.7; font-weight:300; }
+  .photo-credit{
+    font-family:'Raleway',sans-serif; font-size:9.5px; color:var(--ivory-dim);
+    position:absolute; top:12px; right:12px; z-index:2; opacity:.6;
+  }
+
+  /* ---------- SECTION INDEX ---------- */
+  .index-section{ padding:140px 48px 80px; }
+  .index-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:80px; gap:24px; flex-wrap:wrap;
+    border-bottom:1px solid var(--rule); padding-bottom:36px;
+  }
+  .index-head .mono{ font-size:12px; color:var(--brass); }
+  .index-head h2{
+    font-family:'Raleway',sans-serif; font-weight:400; font-size:clamp(32px,4vw,52px);
+    margin-top:10px; max-width:14ch;
+  }
+  .index-head p{ max-width:34ch; font-size:14px; color:var(--ivory-dim); line-height:1.7; font-weight:300; }
+
+  .index-list{ display:flex; flex-direction:column; }
+  .index-row{
+    display:grid; grid-template-columns:80px 40px 1fr auto; align-items:center;
+    gap:22px; padding:34px 0; border-bottom:1px solid var(--rule);
+    cursor:pointer; position:relative; overflow:hidden;
+    opacity:0; transform:translateY(28px);
+    transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+  }
+  .index-icon{ width:34px; height:34px; display:flex; align-items:center; justify-content:center; }
+  .index-icon svg{ width:20px; height:20px; stroke:var(--brass-dim); fill:none; stroke-width:1.4; transition:stroke .4s ease; }
+  .index-row:hover .index-icon svg{ stroke:var(--brass); }
+  .index-row.in-view{ opacity:1; transform:translateY(0); }
+  .index-row::before{
+    content:''; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+    background:var(--brass); transform:scaleX(0); transform-origin:left;
+    transition:transform .5s cubic-bezier(.16,1,.3,1);
+  }
+  .index-row:hover::before{ transform:scaleX(1); }
+  .index-num{ font-family:'Raleway',sans-serif; font-size:13px; color:var(--brass-dim); }
+  .index-row:hover .index-num{ color:var(--brass); }
+  .index-titles{ display:flex; flex-direction:column; gap:6px; }
+  .index-titles .en{
+    font-family:'Raleway',sans-serif; font-size:clamp(26px,3.4vw,44px); font-weight:400;
+    letter-spacing:-.01em; transition:transform .5s cubic-bezier(.16,1,.3,1), color .4s ease;
+  }
+  .index-row:hover .index-titles .en{ transform:translateX(14px); color:var(--brass); }
+  .index-titles .sub{ font-size:12.5px; color:var(--ivory-dim); font-weight:300; }
+  .index-arrow{
+    width:44px; height:44px; border:1px solid var(--rule); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transition:border-color .4s ease, transform .5s cubic-bezier(.16,1,.3,1), background .4s ease;
+    flex-shrink:0;
+  }
+  .index-row:hover .index-arrow{ border-color:var(--brass); transform:rotate(45deg); background:var(--brass); }
+  .index-arrow svg{ width:16px; height:16px; stroke:var(--ivory); }
+  .index-row:hover .index-arrow svg{ stroke:var(--bg); }
+  @media (max-width:640px){
+    .index-row{ grid-template-columns:36px 30px 1fr auto; gap:12px; padding:24px 0; }
+  }
+
+  /* ---------- STRIP / PRESENCE ---------- */
+  .strip{
+    padding:120px 48px; border-top:1px solid var(--rule);
+    display:grid; grid-template-columns:1fr 1fr; gap:60px;
+    align-items:center;
+  }
+  @media (max-width:900px){ .strip{ grid-template-columns:1fr; gap:40px; padding:80px 24px; } }
+  .strip-copy .mono{ font-size:12px; color:var(--brass); margin-bottom:18px; display:block; }
+  .strip-copy h3{
+    font-family:'Raleway',sans-serif; font-weight:400; font-size:clamp(28px,3.4vw,42px);
+    line-height:1.15; margin-bottom:22px; max-width:12ch;
+  }
+  .strip-copy p{ color:var(--ivory-dim); font-size:14.5px; line-height:1.75; font-weight:300; max-width:42ch; }
+
+  .globe-wrap{ position:relative; aspect-ratio:1/1; max-width:420px; margin:0 auto; }
+  .globe-ring{
+    position:absolute; inset:0; border:1px solid var(--rule); border-radius:50%;
+  }
+  .globe-ring.r2{ inset:14%; border-color:var(--rule); }
+  .globe-ring.r3{ inset:28%; border-style:dashed; opacity:.5; }
+  .globe-dot{
+    position:absolute; width:6px; height:6px; border-radius:50%; background:var(--brass);
+    box-shadow:0 0 0 8px rgba(184,147,90,.08);
+  }
+  .globe-spin{ position:absolute; inset:0; animation:spin 40s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .globe-label{
+    position:absolute; font-family:'Raleway',sans-serif; font-size:10.5px;
+    color:var(--ivory-dim); white-space:nowrap;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:80px 48px 40px; border-top:1px solid var(--rule);
+  }
+  .footer-top{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:40px;
+    padding-bottom:60px;
+  }
+  .footer-cta h4{
+    font-family:'Raleway',sans-serif; font-weight:400; font-size:clamp(30px,4vw,54px);
+    max-width:12ch; line-height:1.05;
+  }
+  .footer-cta h4 span{ color:var(--brass); font-style:italic; font-weight:300; }
+  .footer-links{ display:flex; gap:64px; flex-wrap:wrap; }
+  .footer-col h5{
+    font-size:11px; text-transform:uppercase; letter-spacing:.14em; color:var(--brass-dim);
+    margin-bottom:16px;
+  }
+  .footer-col a{
+    display:block; font-size:13.5px; color:var(--ivory-dim); margin-bottom:10px;
+    transition:color .3s ease;
+  }
+  .footer-col a:hover{ color:var(--ivory); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; padding-top:28px; border-top:1px solid var(--rule);
+    font-size:11.5px; color:var(--ivory-dim); flex-wrap:wrap; gap:12px;
+  }
+
+  .note{
+    position:fixed; bottom:16px; right:16px; z-index:200;
+    font-family:'Raleway',sans-serif; font-size:10px; color:var(--ivory-dim);
+    background:rgba(17,18,20,.8); border:1px solid var(--rule); padding:6px 10px; border-radius:4px;
+    backdrop-filter:blur(4px);
+  }
+</style>
+</head>
+<body>
+
+<div class="note">FML Group · visual concept · placeholder imagery</div>
+
+<header>
+  <div class="logo">FML <span>—</span> GROUP</div>
+  <div class="header-right">
+    <nav class="desktop-nav">
+      <a href="#">The Group</a>
+      <a href="#">History</a>
+      <a href="#">Portfolio</a>
+      <a href="#">Presence</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="lang-switch">
+      <button class="active" data-lang="en">EN</button>
+      <span class="sep">/</span>
+      <button data-lang="fr">FR</button>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#"><span class="num">01</span>The Group</a>
+  <a href="#"><span class="num">02</span>History</a>
+  <a href="#"><span class="num">03</span>Portfolio</a>
+  <a href="#"><span class="num">04</span>Presence</a>
+  <a href="#"><span class="num">05</span>Contact Us</a>
+  <div class="lang-switch">
+    <button class="active" data-lang="en">EN</button>
+    <span class="sep">/</span>
+    <button data-lang="fr">FR</button>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <video autoplay muted loop playsinline id="heroVideo" poster="">
+    <!-- Drop real licensed footage here, e.g. <source src="/media/hero-fisheries-port.mp4" type="video/mp4"> -->
+  </video>
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-scrim"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-noise"></div>
+  <div class="coord-ticker mono" id="coordTicker"></div>
+  <div class="video-tag mono">bg: video-ready — add &lt;source&gt; to go live</div>
+
+  <div class="hero-eyebrow">Est. 1994 &nbsp;·&nbsp; Mauritius &amp; West Africa</div>
+  <h1 class="hero-title">From open water <em>to open port.</em></h1>
+  <div class="hero-foot">
+    <div>
+      <p class="hero-desc">FML Group operates across Finance, Maritime and Logistique — from Mauritius to the West African coast.</p>
+      <a href="#" class="cta-btn">Discover the Group →</a>
+    </div>
+    <div class="hero-scroll"><div class="scroll-line"></div>Scroll</div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee mono" id="marquee"></div>
+</div>
+
+<section class="sectors">
+  <div class="sectors-head">
+    <span class="mono">What we operate</span>
+    <h2>Three clusters, one group</h2>
+  </div>
+  <div class="sector-grid" id="sectorGrid">
+    <div class="sector-card">
+      <div class="sector-photo">
+        <div class="photo-credit mono">original illustration</div>
+        <div class="photo-placeholder" role="img" aria-label="Illustration representing financing and investment">
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="gradFin" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4096ee" stop-opacity=".9"/>
+                <stop offset="100%" stop-color="#39ced6" stop-opacity=".9"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="250" fill="#232426"/>
+            <g opacity=".5" stroke="#4a4b4e" stroke-width="1">
+              <rect x="30" y="150" width="24" height="70"/>
+              <rect x="64" y="120" width="24" height="100"/>
+              <rect x="98" y="95" width="24" height="125"/>
+              <rect x="132" y="60" width="24" height="160"/>
+              <rect x="166" y="80" width="24" height="140"/>
+            </g>
+            <polyline points="30,160 90,130 150,110 210,70 270,90 340,40" fill="none" stroke="url(#gradFin)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="340" cy="40" r="5" fill="#39ced6"/>
+            <circle cx="210" cy="70" r="4" fill="#4096ee"/>
+            <g opacity=".35" stroke="#5a5b5e" stroke-width="1">
+              <line x1="0" y1="80" x2="400" y2="80"/>
+              <line x1="0" y1="130" x2="400" y2="130"/>
+              <line x1="0" y1="180" x2="400" y2="180"/>
+            </g>
+          </svg>
+        </div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 15l4-4 3 3 5-6"/></svg>
+        </div>
+      </div>
+      <div class="sector-body">
+        <span class="tag">01 — Finance</span>
+        <h3>Investment &amp; financing</h3>
+        <ul class="sub-list">
+          <li>Financement / prise de participation — Industrie <span class="placeholder-tag">XYZ</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-photo">
+        <div class="photo-credit mono">original illustration</div>
+        <div class="photo-placeholder" role="img" aria-label="Illustration representing maritime and fisheries operations">
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="gradMar" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#4096ee"/>
+                <stop offset="100%" stop-color="#39ced6"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="250" fill="#232426"/>
+            <circle cx="330" cy="55" r="26" fill="none" stroke="url(#gradMar)" stroke-width="1.5" opacity=".8"/>
+            <g stroke="#4a4b4e" stroke-width="1" fill="none" opacity=".6">
+              <path d="M0 90 Q40 80 80 90 T160 90 T240 90 T320 90 T400 90"/>
+              <path d="M0 110 Q40 100 80 110 T160 110 T240 110 T320 110 T400 110"/>
+            </g>
+            <path d="M110 150 L290 150 L265 185 L135 185 Z" fill="#2c2d30" stroke="#5a5b5e" stroke-width="1.2"/>
+            <rect x="180" y="110" width="6" height="42" fill="#5a5b5e"/>
+            <rect x="150" y="128" width="60" height="24" fill="#2c2d30" stroke="url(#gradMar)" stroke-width="1.2"/>
+            <path d="M186 112 L230 128 L186 128 Z" fill="url(#gradMar)" opacity=".55"/>
+            <path d="M0 195 Q50 180 100 195 T200 195 T300 195 T400 195 L400 250 L0 250 Z" fill="#1c1d1f"/>
+            <path d="M0 205 Q50 190 100 205 T200 205 T300 205 T400 205" fill="none" stroke="url(#gradMar)" stroke-width="1.5" opacity=".5"/>
+          </svg>
+        </div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6Z"/><circle cx="16" cy="12" r="1"/></svg>
+        </div>
+      </div>
+      <div class="sector-body">
+        <span class="tag">02 — Maritime</span>
+        <h3>Registry, fisheries &amp; security</h3>
+        <ul class="sub-list">
+          <li>Registre maritime — pavillon <span class="placeholder-tag">XYZ</span></li>
+          <li>Pêche</li>
+          <li>Sécurité, surveillance &amp; lutte contre la prolifération des marchés illicites</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-photo">
+        <div class="photo-credit mono">original illustration</div>
+        <div class="photo-placeholder" role="img" aria-label="Illustration representing port, mining and cement logistics">
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="gradLog" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4096ee"/>
+                <stop offset="100%" stop-color="#39ced6"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="250" fill="#232426"/>
+            <line x1="60" y1="40" x2="60" y2="210" stroke="url(#gradLog)" stroke-width="3"/>
+            <line x1="60" y1="55" x2="230" y2="55" stroke="url(#gradLog)" stroke-width="3"/>
+            <line x1="60" y1="55" x2="30" y2="80" stroke="#5a5b5e" stroke-width="2"/>
+            <line x1="200" y1="55" x2="200" y2="110" stroke="#5a5b5e" stroke-width="2"/>
+            <rect x="185" y="108" width="30" height="14" fill="#2c2d30" stroke="#5a5b5e" stroke-width="1"/>
+            <g stroke="#4a4b4e" stroke-width="1" opacity=".6">
+              <line x1="60" y1="90" x2="230" y2="90"/>
+              <line x1="90" y1="55" x2="90" y2="90"/>
+              <line x1="140" y1="55" x2="140" y2="90"/>
+            </g>
+            <g>
+              <rect x="90" y="160" width="55" height="40" fill="#2c2d30" stroke="#4096ee" stroke-width="1.2"/>
+              <rect x="150" y="160" width="55" height="40" fill="#2c2d30" stroke="#39ced6" stroke-width="1.2"/>
+              <rect x="210" y="160" width="55" height="40" fill="#2c2d30" stroke="#4096ee" stroke-width="1.2"/>
+              <rect x="120" y="120" width="55" height="40" fill="#2c2d30" stroke="#39ced6" stroke-width="1.2"/>
+              <rect x="180" y="120" width="55" height="40" fill="#2c2d30" stroke="#4096ee" stroke-width="1.2"/>
+            </g>
+            <line x1="0" y1="210" x2="400" y2="210" stroke="#5a5b5e" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 21h16M6 21V10l6-5 6 5v11M9 21v-6h6v6M4 10h16"/></svg>
+        </div>
+      </div>
+      <div class="sector-body">
+        <span class="tag">03 — Logistique</span>
+        <h3>Port, mining &amp; cement freight</h3>
+        <ul class="sub-list">
+          <li>Portuaire</li>
+          <li>Minière</li>
+          <li>Cimentiers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="strip">
+  <div class="strip-copy">
+    <span class="mono">Presence</span>
+    <h3>Mauritius to the West African coast</h3>
+    <p>Fishing fleets, processing plants, and port terminals positioned from Port Louis to the West African seaboard — each site reporting into a single governance structure.</p>
+  </div>
+  <div class="globe-wrap">
+    <div class="globe-ring"></div>
+    <div class="globe-ring r2"></div>
+    <div class="globe-ring r3"></div>
+    <div class="globe-spin">
+      <div class="globe-dot" style="top:18%; left:52%;"></div>
+      <div class="globe-dot" style="top:60%; left:20%;"></div>
+      <div class="globe-dot" style="top:72%; left:68%;"></div>
+      <div class="globe-dot" style="top:40%; left:82%;"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-cta">
+      <h4>Let's build the <span>next</span> chapter.</h4>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h5>Group</h5>
+        <a href="#">The Group</a>
+        <a href="#">History</a>
+        <a href="#">Portfolio</a>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <a href="#">Presence</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom mono">
+    <span>© 2026 FML Group. All rights reserved.</span>
+    <span>Port Louis — Abidjan — Dakar</span>
+  </div>
+</footer>
+
+<script>
+  const heroVideo = document.getElementById('heroVideo');
+  const heroCanvasEl = document.getElementById('heroCanvas');
+  if (heroVideo.querySelector('source')) {
+    heroVideo.classList.add('has-source');
+    heroCanvasEl.classList.add('hide');
+  }
+
+  const coords = ['20.1609° S, 57.5012° E — Port Louis', '5.3600° N, 4.0083° W — Abidjan', '14.6928° N, 17.4467° W — Dakar', '20.9273° S, 57.4996° E — Mahébourg'];
+  document.getElementById('coordTicker').innerHTML =
+    coords.map(c => `<span>${c}</span>`).join('<span class="divider"></span>');
+
+  const cities = ['PORT LOUIS','ABIDJAN','DAKAR','NOUADHIBOU','TEMA','WALVIS BAY'];
+  const m = document.getElementById('marquee');
+  const set = cities.map(c => `<span>${c}</span>`).join('');
+  m.innerHTML = set + set;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in-view'), i * 60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold:.15 });
+  document.querySelectorAll('.sector-card').forEach(r => io.observe(r));
+
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  function resize(){
+    w = canvas.width = canvas.offsetWidth * devicePixelRatio;
+    h = canvas.height = canvas.offsetHeight * devicePixelRatio;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  let t = 0;
+  const lines = 22;
+  function draw(){
+    t += 0.004;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle = '#0A0D0E';
+    ctx.fillRect(0,0,w,h);
+    for(let i=0;i<lines;i++){
+      const y = (h/lines)*i + Math.sin(t*1.4 + i*0.4) * 10 * devicePixelRatio;
+      const amp = 14 + (i%5)*4;
+      ctx.beginPath();
+      for(let x=0;x<=w;x+=18*devicePixelRatio){
+        const yy = y + Math.sin(x*0.006 + t*2 + i*0.5) * amp;
+        if(x===0) ctx.moveTo(x,yy); else ctx.lineTo(x,yy);
+      }
+      const fade = 1 - Math.abs(i/lines - 0.5)*1.2;
+      ctx.strokeStyle = `rgba(184,147,90,${0.05 + fade*0.05})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+    requestAnimationFrame(draw);
+  }
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  document.querySelectorAll('.lang-switch').forEach(group => {
+    group.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.lang-switch button').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll(`.lang-switch button[data-lang="${btn.dataset.lang}"]`).forEach(b => b.classList.add('active'));
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
