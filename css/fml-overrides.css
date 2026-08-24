@@ -30,6 +30,30 @@
 .services-list .item:hover .cluster-illustration{ opacity:.3; }
 .cluster-illustration svg{ width:100%; height:100%; display:block; }
 .service-box{ position:relative; z-index:1; }
+.cluster-tagline{ margin-bottom:8px; }
+.sub-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  text-align:left;
+}
+.sub-list li{
+  position:relative;
+  padding-left:16px;
+  margin-bottom:6px;
+  font-size:14px;
+  line-height:1.5;
+}
+.sub-list li::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:9px;
+  width:6px;
+  height:1px;
+  background:currentColor;
+  opacity:.6;
+}
 .services-list .item:hover{
   color:#fff;
 }

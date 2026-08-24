@@ -12,7 +12,7 @@
       'nav.history': 'History',
       'nav.contact': 'Contact',
 
-      'hero.eyebrow': 'Capital. Coastline. Cargo.',
+      'hero.eyebrow': 'Finance, Maritime, Logistics',
       'hero.body': "From Port Louis to the West African coast, FML Group finances industry, commands the sea, and keeps the region's trade moving — three pillars, one group.",
       'hero.scroll': 'Scroll Down',
 
@@ -28,9 +28,9 @@
       'portfolio.eyebrow': 'Portfolio',
       'portfolio.h2': 'What each pillar carries',
 
-      'finance.body': '<strong>Capital with conviction.</strong> Financing and equity investment — Industry <em>XYZ</em>.',
-      'maritime.body': '<strong>Command of the sea.</strong> Maritime registry (flag <em>XYZ</em>), fisheries, security &amp; surveillance — combating the proliferation of illicit markets.',
-      'logistique.body': '<strong>The chain that never stops.</strong> Port, mining and cement freight.',
+      'finance.body': '<p class="cluster-tagline"><strong>Capital with conviction.</strong></p><ul class="sub-list"><li>Financing / equity investment — Industry <em>XYZ</em></li></ul>',
+      'maritime.body': '<p class="cluster-tagline"><strong>Command of the sea.</strong></p><ul class="sub-list"><li>Maritime registry — flag <em>XYZ</em></li><li>Fisheries</li><li>Security &amp; surveillance — combating the proliferation of illicit markets</li></ul>',
+      'logistique.body': '<p class="cluster-tagline"><strong>The chain that never stops.</strong></p><ul class="sub-list"><li>Port</li><li>Mining</li><li>Cement</li></ul>',
 
       'presence.eyebrow': 'Presence',
       'presence.h2': 'One coastline, four ports of call',
@@ -68,7 +68,7 @@
       'nav.history': 'Historique',
       'nav.contact': 'Contact',
 
-      'hero.eyebrow': 'Capital. Littoral. Fret.',
+      'hero.eyebrow': 'Finance, Maritime, Logistique',
       'hero.body': "De Port Louis à la côte ouest-africaine, FML Group finance l'industrie, commande la mer et fait circuler le commerce régional — trois piliers, un seul groupe.",
       'hero.scroll': 'Défiler',
 
@@ -84,9 +84,9 @@
       'portfolio.eyebrow': 'Portefeuille',
       'portfolio.h2': 'Ce que porte chaque pilier',
 
-      'finance.body': '<strong>Le capital, avec conviction.</strong> Financement / prise de participation — Industrie <em>XYZ</em>.',
-      'maritime.body': '<strong>Le commandement de la mer.</strong> Registre maritime (pavillon <em>XYZ</em>), pêche, sécurité &amp; surveillance — lutte contre la prolifération des marchés illicites.',
-      'logistique.body': "<strong>La chaîne qui ne s'arrête jamais.</strong> Portuaire, minière, cimentiers.",
+      'finance.body': '<p class="cluster-tagline"><strong>Le capital, avec conviction.</strong></p><ul class="sub-list"><li>Financement / prise de participation — Industrie <em>XYZ</em></li></ul>',
+      'maritime.body': '<p class="cluster-tagline"><strong>Le commandement de la mer.</strong></p><ul class="sub-list"><li>Registre maritime — pavillon <em>XYZ</em></li><li>Pêche</li><li>Sécurité, surveillance — lutte contre la prolifération des marchés illicites</li></ul>',
+      'logistique.body': '<p class="cluster-tagline"><strong>La chaîne qui ne s\'arrête jamais.</strong></p><ul class="sub-list"><li>Portuaire</li><li>Minière</li><li>Cimentiers</li></ul>',
 
       'presence.eyebrow': 'Présence',
       'presence.h2': 'Un littoral, quatre escales',
@@ -143,7 +143,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     var saved = null;
     try { saved = localStorage.getItem('fml-lang'); } catch (e) { /* ignore */ }
-    if (saved === 'fr') applyLang('fr');
+    applyLang(saved === 'fr' ? 'fr' : 'en');
 
     document.querySelectorAll('.lang-link').forEach(function (a) {
       a.addEventListener('click', function (e) {
