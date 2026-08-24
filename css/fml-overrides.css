@@ -103,6 +103,9 @@
   width:100%;
 }
 
+.about-contentbox{
+  margin-top:0;
+}
 .illustration-box{
   width:100%;
   aspect-ratio:1/1;
