@@ -1,0 +1,58 @@
+/* FML Group additions — kept separate from the theme's own CSS files
+   so the original template styling stays fully intact and upgradeable. */
+
+.gallery-list .item{
+  width:100%;
+}
+
+.illustration-box{
+  width:100%;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  border-radius:4px;
+}
+.illustration-box svg{ width:100%; height:100%; display:block; }
+
+.milestone-tile{
+  width:100%;
+  aspect-ratio:16/10;
+  background:linear-gradient(160deg, #2c2d30 0%, #1c1d1f 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.milestone-tile::before{
+  content: attr(data-year);
+  font-family:'Raleway', sans-serif;
+  font-weight:700;
+  font-size:15px;
+  letter-spacing:.08em;
+  color:transparent;
+  background:linear-gradient(90deg, #4096ee, #39ced6);
+  -webkit-background-clip:text;
+  background-clip:text;
+}
+
+.service-icon i,
+.counter-icon{
+  background:linear-gradient(90deg, #4096ee, #39ced6);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.placeholder-note{
+  font-family:'Raleway', sans-serif;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.45);
+  position:fixed;
+  bottom:14px;
+  right:14px;
+  z-index:999;
+  background:rgba(0,0,0,.4);
+  padding:6px 10px;
+  border-radius:3px;
+}
