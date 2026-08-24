@@ -26,7 +26,7 @@
     <body>
 
     <div id="video">
-        <div class="placeholder-note">FML Group · placeholder content &amp; illustrations</div>
+        <div class="placeholder-note" data-i18n="note.placeholder">FML Group · placeholder content &amp; illustrations</div>
         <div class="preloader">
             <div class="preloader-bounce">
                 <span></span>
@@ -46,12 +46,12 @@
                             <button type="button" class="navbar-toggle"> <i class="fa fa-bars"></i> </button>
                             <div class="nav-box navbar-collapse">
                                 <ul class="navigation-menu nav navbar-nav navbars" id="nav">
-                                    <li data-menuanchor="slide01" class="active"><a href="#slide01">Home</a></li>
-                                    <li data-menuanchor="slide02"><a href="#slide02">The Group</a></li>
-                                    <li data-menuanchor="slide03"><a href="#slide03">Portfolio</a></li>
-                                    <li data-menuanchor="slide04"><a href="#slide04">Presence</a></li>
-                                    <li data-menuanchor="slide05"><a href="#slide05">History</a></li>
-                                    <li data-menuanchor="slide06"><a href="#slide06">Contact</a></li>
+                                    <li data-menuanchor="slide01" class="active"><a href="#slide01" data-i18n="nav.home">Home</a></li>
+                                    <li data-menuanchor="slide02"><a href="#slide02" data-i18n="nav.group">The Group</a></li>
+                                    <li data-menuanchor="slide03"><a href="#slide03" data-i18n="nav.portfolio">Portfolio</a></li>
+                                    <li data-menuanchor="slide04"><a href="#slide04" data-i18n="nav.presence">Presence</a></li>
+                                    <li data-menuanchor="slide05"><a href="#slide05" data-i18n="nav.history">History</a></li>
+                                    <li data-menuanchor="slide06"><a href="#slide06" data-i18n="nav.contact">Contact</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -66,15 +66,32 @@
              <source src="images/hero-bg.mp4" type="video/mp4"> -->
         <video autoplay muted loop id="myVideo"></video>
 
+        <div class="hero-illustration" aria-hidden="true">
+            <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+                <g fill="#fff" opacity=".9">
+                    <rect x="60" y="700" width="70" height="260"/>
+                    <rect x="140" y="620" width="55" height="340"/>
+                    <rect x="205" y="740" width="60" height="220"/>
+                    <rect x="1250" y="660" width="65" height="300"/>
+                    <rect x="1325" y="720" width="55" height="240"/>
+                </g>
+                <polyline points="60,640 260,560 460,610 660,420 860,500 1080,340 1280,600" fill="none" stroke="#fff" stroke-width="3" opacity=".55" stroke-linecap="round" stroke-linejoin="round"/>
+                <g stroke="#fff" stroke-width="2" fill="none" opacity=".4">
+                    <path d="M0 830 Q120 800 240 830 T480 830 T720 830 T960 830 T1200 830 T1440 830"/>
+                    <path d="M0 860 Q120 830 240 860 T480 860 T720 860 T960 860 T1200 860 T1440 860"/>
+                </g>
+            </svg>
+        </div>
+
         <div id="fullpage" class="fullpage-default">
 
             <div class="section animated-row" data-section="slide01">
                 <div class="section-inner">
                     <div class="welcome-box">
-                        <span class="welcome-first animate" data-animate="fadeInUp">Mauritius &amp; West Africa</span>
+                        <span class="welcome-first animate" data-animate="fadeInUp" data-i18n="hero.eyebrow">Capital. Coastline. Cargo.</span>
                         <h1 class="welcome-title animate" data-animate="fadeInUp">FML Group</h1>
-                        <p class="animate" data-animate="fadeInUp">FML Group operates across Finance, Maritime and Logistique — from Mauritius to the West African coast.</p>
-                        <div class="scroll-down next-section animate" data-animate="fadeInUp"><img src="images/mouse-scroll.png" alt=""><span>Scroll Down</span></div>
+                        <p class="animate" data-animate="fadeInUp" data-i18n="hero.body">From Port Louis to the West African coast, FML Group finances industry, commands the sea, and keeps the region's trade moving — three pillars, one group.</p>
+                        <div class="scroll-down next-section animate" data-animate="fadeInUp"><img src="images/mouse-scroll.png" alt=""><span data-i18n="hero.scroll">Scroll Down</span></div>
                     </div>
                 </div>
             </div>
@@ -88,29 +105,29 @@
                                     <div class="col-md-6">
                                         <div class="about-contentbox">
                                             <div class="animate" data-animate="fadeInUp">
-                                                <span>The Group</span>
-                                                <h2>Who we are</h2>
-                                                <p>FML Group is a diversified holding company built around three activities: Finance, Maritime and Logistique. Operating from Mauritius across the West African coast, the group brings investment, maritime operations, and freight logistics under a single governance structure.</p>
+                                                <span data-i18n="group.eyebrow">The Group</span>
+                                                <h2 data-i18n="group.h2">Three pillars, one direction</h2>
+                                                <p data-i18n="group.body">FML Group was built on a simple conviction: that finance, the sea, and the supply chain are not separate businesses but one continuous chain of trust. We back the ventures that need capital, we govern the waters that carry the region's trade, and we move what industry depends on — port to mine, mine to cement plant. Mauritius is home. West Africa is where we grow.</p>
                                             </div>
                                             <div class="facts-list owl-carousel">
                                                 <div class="item animate" data-animate="fadeInUp">
                                                     <div class="counter-box">
-                                                        <i class="fa fa-building counter-icon" aria-hidden="true"></i><span class="count-number">3</span> Activity Clusters
+                                                        <i class="fa fa-building counter-icon" aria-hidden="true"></i><span class="count-number">3</span> <span class="fact-label" data-i18n="fact.pillars">Pillars</span>
                                                     </div>
                                                 </div>
                                                 <div class="item animate" data-animate="fadeInUp">
                                                     <div class="counter-box">
-                                                        <i class="fa fa-globe counter-icon" aria-hidden="true"></i><span class="count-number">2</span> Regions
+                                                        <i class="fa fa-globe counter-icon" aria-hidden="true"></i><span class="count-number">2</span> <span class="fact-label" data-i18n="fact.regions">Regions</span>
                                                     </div>
                                                 </div>
                                                 <div class="item animate" data-animate="fadeInUp">
                                                     <div class="counter-box">
-                                                        <i class="fa fa-anchor counter-icon" aria-hidden="true"></i><span class="count-number">1994</span> Founded
+                                                        <i class="fa fa-certificate counter-icon" aria-hidden="true"></i><span class="count-number">2026</span> <span class="fact-label" data-i18n="fact.registered">Registered</span>
                                                     </div>
                                                 </div>
                                                 <div class="item animate" data-animate="fadeInUp">
                                                     <div class="counter-box">
-                                                        <i class="fa fa-ship counter-icon" aria-hidden="true"></i><span class="count-number">4</span> Maritime activities
+                                                        <i class="fa fa-ship counter-icon" aria-hidden="true"></i><span class="count-number">4</span> <span class="fact-label" data-i18n="fact.maritime">Maritime mandates</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -118,27 +135,46 @@
                                     </div>
                                     <div class="col-md-6">
                                         <figure class="about-img animate" data-animate="fadeInUp">
-                                            <div class="illustration-box" aria-label="FML Group — original illustration, coordinate grid over Mauritius and West Africa">
+                                            <div class="illustration-box" aria-label="FML Group — original illustration combining skyline, capital markets and coastline">
                                                 <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
                                                     <defs>
                                                         <linearGradient id="gAbout" x1="0" y1="0" x2="1" y2="1">
                                                             <stop offset="0%" stop-color="#4096ee"/>
                                                             <stop offset="100%" stop-color="#39ced6"/>
                                                         </linearGradient>
+                                                        <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
+                                                            <stop offset="0%" stop-color="#2f3134"/>
+                                                            <stop offset="100%" stop-color="#232426"/>
+                                                        </linearGradient>
                                                     </defs>
-                                                    <rect width="400" height="400" fill="#2a2a2a"/>
-                                                    <g stroke="#454545" stroke-width="1">
-                                                        <line x1="0" y1="100" x2="400" y2="100"/>
-                                                        <line x1="0" y1="200" x2="400" y2="200"/>
-                                                        <line x1="0" y1="300" x2="400" y2="300"/>
-                                                        <line x1="100" y1="0" x2="100" y2="400"/>
-                                                        <line x1="200" y1="0" x2="200" y2="400"/>
-                                                        <line x1="300" y1="0" x2="300" y2="400"/>
+                                                    <rect width="400" height="400" fill="url(#gSky)"/>
+
+                                                    <!-- skyline -->
+                                                    <g fill="#3a3b3e">
+                                                        <rect x="20" y="200" width="34" height="130"/>
+                                                        <rect x="60" y="160" width="28" height="170"/>
+                                                        <rect x="94" y="220" width="30" height="110"/>
+                                                        <rect x="130" y="120" width="26" height="210"/>
+                                                        <rect x="162" y="190" width="32" height="140"/>
                                                     </g>
-                                                    <circle cx="220" cy="230" r="6" fill="url(#gAbout)"/>
-                                                    <circle cx="150" cy="150" r="4" fill="#39ced6"/>
-                                                    <circle cx="290" cy="180" r="4" fill="#4096ee"/>
-                                                    <path d="M150 150 L220 230 L290 180" fill="none" stroke="url(#gAbout)" stroke-width="1.5" opacity=".7"/>
+
+                                                    <!-- financial line rising through the skyline -->
+                                                    <polyline points="20,260 65,230 100,245 140,175 185,205 230,140" fill="none" stroke="url(#gAbout)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <circle cx="230" cy="140" r="6" fill="#39ced6"/>
+
+                                                    <!-- coastline -->
+                                                    <path d="M0 330 Q60 315 120 330 T240 330 T360 330 L400 330 L400 400 L0 400 Z" fill="#1c1d1f"/>
+                                                    <path d="M0 340 Q60 325 120 340 T240 340 T360 340 T400 340" fill="none" stroke="url(#gAbout)" stroke-width="1.5" opacity=".5"/>
+
+                                                    <!-- vessel -->
+                                                    <path d="M280 320 L360 320 L348 345 L292 345 Z" fill="#2f3134" stroke="#4a4b4e" stroke-width="1"/>
+                                                    <line x1="320" y1="290" x2="320" y2="320" stroke="#5a5b5e" stroke-width="2"/>
+                                                    <path d="M321 292 L345 306 L321 306 Z" fill="url(#gAbout)" opacity=".7"/>
+
+                                                    <!-- coordinate marks -->
+                                                    <circle cx="330" cy="80" r="4" fill="#4096ee"/>
+                                                    <circle cx="360" cy="60" r="3" fill="#39ced6"/>
+                                                    <line x1="330" y1="80" x2="360" y2="60" stroke="url(#gAbout)" stroke-width="1" opacity=".6"/>
                                                 </svg>
                                             </div>
                                         </figure>
@@ -155,30 +191,64 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8 wide-col-laptop">
                             <div class="title-block animate" data-animate="fadeInUp">
-                                <span>Portfolio</span>
-                                <h2>Three clusters, one group</h2>
+                                <span data-i18n="portfolio.eyebrow">Portfolio</span>
+                                <h2 data-i18n="portfolio.h2">What each pillar carries</h2>
                             </div>
                             <div class="services-section">
                                 <div class="services-list owl-carousel">
                                     <div class="item animate" data-animate="fadeInUp">
+                                        <div class="cluster-illustration" aria-hidden="true">
+                                            <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
+                                                <polyline points="20,300 70,250 120,270 170,180 220,210 280,120" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <circle cx="280" cy="120" r="8" fill="#fff"/>
+                                                <g stroke="#fff" stroke-width="1" opacity=".5">
+                                                    <line x1="0" y1="150" x2="300" y2="150"/>
+                                                    <line x1="0" y1="220" x2="300" y2="220"/>
+                                                    <line x1="0" y1="290" x2="300" y2="290"/>
+                                                </g>
+                                            </svg>
+                                        </div>
                                         <div class="service-box">
                                             <span class="service-icon"><i class="fa fa-line-chart" aria-hidden="true"></i></span>
                                             <h3>Finance</h3>
-                                            <p>Financement / prise de participation — Industrie <em>XYZ</em>.</p>
+                                            <p data-i18n="finance.body"><strong>Capital with conviction.</strong> Financement / prise de participation — Industrie <em>XYZ</em>.</p>
                                         </div>
                                     </div>
                                     <div class="item animate" data-animate="fadeInUp">
+                                        <div class="cluster-illustration" aria-hidden="true">
+                                            <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
+                                                <circle cx="230" cy="80" r="30" fill="none" stroke="#fff" stroke-width="2"/>
+                                                <path d="M60 260 L240 260 L215 300 L85 300 Z" fill="none" stroke="#fff" stroke-width="3"/>
+                                                <line x1="150" y1="200" x2="150" y2="260" stroke="#fff" stroke-width="3"/>
+                                                <path d="M150 205 L200 230 L150 230 Z" fill="#fff" opacity=".7"/>
+                                                <g stroke="#fff" stroke-width="2" fill="none" opacity=".6">
+                                                    <path d="M0 330 Q40 315 80 330 T160 330 T240 330 T300 330"/>
+                                                    <path d="M0 350 Q40 335 80 350 T160 350 T240 350 T300 350"/>
+                                                </g>
+                                            </svg>
+                                        </div>
                                         <div class="service-box">
                                             <span class="service-icon"><i class="fa fa-anchor" aria-hidden="true"></i></span>
                                             <h3>Maritime</h3>
-                                            <p>Registre maritime (pavillon <em>XYZ</em>), pêche, sécurité &amp; surveillance — lutte contre la prolifération des marchés illicites.</p>
+                                            <p data-i18n="maritime.body"><strong>Command of the sea.</strong> Registre maritime (pavillon <em>XYZ</em>), pêche, sécurité &amp; surveillance — lutte contre la prolifération des marchés illicites.</p>
                                         </div>
                                     </div>
                                     <div class="item animate" data-animate="fadeInUp">
+                                        <div class="cluster-illustration" aria-hidden="true">
+                                            <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">
+                                                <line x1="60" y1="40" x2="60" y2="260" stroke="#fff" stroke-width="3"/>
+                                                <line x1="60" y1="60" x2="230" y2="60" stroke="#fff" stroke-width="3"/>
+                                                <line x1="200" y1="60" x2="200" y2="110" stroke="#fff" stroke-width="2"/>
+                                                <rect x="60" y="200" width="50" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+                                                <rect x="115" y="200" width="50" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+                                                <rect x="90" y="155" width="50" height="40" fill="none" stroke="#fff" stroke-width="2"/>
+                                                <line x1="0" y1="260" x2="300" y2="260" stroke="#fff" stroke-width="2" opacity=".6"/>
+                                            </svg>
+                                        </div>
                                         <div class="service-box">
                                             <span class="service-icon"><i class="fa fa-truck" aria-hidden="true"></i></span>
                                             <h3>Logistique</h3>
-                                            <p>Portuaire, minière, cimentiers.</p>
+                                            <p data-i18n="logistique.body"><strong>The chain that never stops.</strong> Portuaire, minière, cimentiers.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -193,8 +263,9 @@
                     <div class="row justify-content-center">
                         <div class="col-md-7 wide-col-laptop">
                             <div class="title-block animate" data-animate="fadeInUp">
-                                <span>Presence</span>
-                                <h2>Where we operate</h2>
+                                <span data-i18n="presence.eyebrow">Presence</span>
+                                <h2 data-i18n="presence.h2">One coastline, four ports of call</h2>
+                                <p data-i18n="presence.body">Headquartered in Mauritius, reaching into West Africa — each location placeholder until confirmed.</p>
                             </div>
                             <div class="skills-row animate" data-animate="fadeInDown">
                                 <div class="row">
@@ -202,28 +273,28 @@
                                         <div class="skill-item">
                                             <h6>Port Louis, Mauritius</h6>
                                             <div class="skill-bar">
-                                                <span>HQ</span>
+                                                <span data-i18n="presence.hq">HQ</span>
                                                 <div class="filled-bar-2"></div>
                                             </div>
                                         </div>
                                         <div class="skill-item">
                                             <h6>Abidjan, Côte d'Ivoire</h6>
                                             <div class="skill-bar">
-                                                <span>Active</span>
+                                                <span data-i18n="presence.active">Active</span>
                                                 <div class="filled-bar"></div>
                                             </div>
                                         </div>
                                         <div class="skill-item">
                                             <h6>Dakar, Sénégal</h6>
                                             <div class="skill-bar">
-                                                <span>Active</span>
+                                                <span data-i18n="presence.active">Active</span>
                                                 <div class="filled-bar"></div>
                                             </div>
                                         </div>
                                         <div class="skill-item last-skill">
                                             <h6>Mahébourg, Mauritius</h6>
                                             <div class="skill-bar">
-                                                <span>Active</span>
+                                                <span data-i18n="presence.active">Active</span>
                                                 <div class="filled-bar"></div>
                                             </div>
                                         </div>
@@ -240,17 +311,17 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8 wide-col-laptop">
                             <div class="title-block animate" data-animate="fadeInUp">
-                                <span>History</span>
-                                <h2>Milestones</h2>
+                                <span data-i18n="history.eyebrow">History</span>
+                                <h2 data-i18n="history.h2">Milestones</h2>
                             </div>
                             <div class="gallery-section">
                                 <div class="gallery-list owl-carousel">
                                     <div class="item animate" data-animate="fadeInUp">
                                         <div class="portfolio-item">
-                                            <div class="thumb milestone-tile" data-year="1994"></div>
+                                            <div class="thumb milestone-tile" data-year="2026"></div>
                                             <div class="thumb-inner animate" data-animate="fadeInUp">
-                                                <h4>1994 — Founded</h4>
-                                                <p>Placeholder milestone — replace with the group's real founding story.</p>
+                                                <h4 data-i18n="history.m1.title">2026 — FML Capital Ltd incorporated</h4>
+                                                <p data-i18n="history.m1.body">Registered in Port Louis, Mauritius (Company No. 234759), as a private company limited by shares.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -258,8 +329,8 @@
                                         <div class="portfolio-item">
                                             <div class="thumb milestone-tile" data-year="20XX"></div>
                                             <div class="thumb-inner animate" data-animate="fadeInUp">
-                                                <h4>West Africa expansion</h4>
-                                                <p>Placeholder milestone — real date and detail to follow.</p>
+                                                <h4 data-i18n="history.m2.title">West Africa expansion</h4>
+                                                <p data-i18n="history.m2.body">Crossing the water to Abidjan and Dakar. (Placeholder — real date to follow.)</p>
                                             </div>
                                         </div>
                                     </div>
@@ -267,8 +338,8 @@
                                         <div class="portfolio-item">
                                             <div class="thumb milestone-tile" data-year="20XX"></div>
                                             <div class="thumb-inner animate" data-animate="fadeInUp">
-                                                <h4>Logistique cluster established</h4>
-                                                <p>Placeholder milestone — real date and detail to follow.</p>
+                                                <h4 data-i18n="history.m3.title">Logistique cluster established</h4>
+                                                <p data-i18n="history.m3.body">Port, mine and cement freight brought under one roof. (Placeholder — real date to follow.)</p>
                                             </div>
                                         </div>
                                     </div>
@@ -284,15 +355,15 @@
                     <div class="row justify-content-center">
                         <div class="col-md-7 wide-col-laptop">
                             <div class="title-block animate" data-animate="fadeInUp">
-                                <span>Contact</span>
-                                <h2>Get In Touch</h2>
+                                <span data-i18n="contact.eyebrow">Contact</span>
+                                <h2 data-i18n="contact.h2">Let's talk</h2>
                             </div>
                             <div class="contact-section">
                                 <div class="row">
                                     <div class="col-md-6 animate" data-animate="fadeInUp">
                                         <div class="contact-box">
                                             <div class="contact-row">
-                                                <i class="fa fa-map-marker"></i> Port Louis, Mauritius (placeholder address)
+                                                <i class="fa fa-map-marker"></i> <span data-i18n="contact.address">Port Louis, Mauritius (placeholder address)</span>
                                             </div>
                                             <div class="contact-row">
                                                 <i class="fa fa-phone"></i> +230 XXX XXXX
@@ -301,19 +372,24 @@
                                                 <i class="fa fa-envelope"></i> contact@fmlgroup.example
                                             </div>
                                         </div>
+                                        <div class="legal-box" data-i18n="contact.legal">
+                                            FML Capital Ltd — Company No. 234759<br>
+                                            Private Company Limited by Shares<br>
+                                            Incorporated 18 May 2026, Port Louis, Mauritius
+                                        </div>
                                     </div>
                                     <div class="col-md-6 animate" data-animate="fadeInUp">
                                         <form id="ajax-contact" method="post" action="#">
                                             <div class="input-field">
-                                                <input type="text" class="form-control" name="name" id="name" required placeholder="Name">
+                                                <input type="text" class="form-control" name="name" id="name" required placeholder="Name" data-i18n-placeholder="form.name">
                                             </div>
                                             <div class="input-field">
-                                                <input type="email" class="form-control" name="email" id="email" required placeholder="Email">
+                                                <input type="email" class="form-control" name="email" id="email" required placeholder="Email" data-i18n-placeholder="form.email">
                                             </div>
                                             <div class="input-field">
-                                                <textarea class="form-control" name="message" id="message" required placeholder="Message"></textarea>
+                                                <textarea class="form-control" name="message" id="message" required placeholder="Message" data-i18n-placeholder="form.message"></textarea>
                                             </div>
-                                            <button class="btn" type="submit">Submit</button>
+                                            <button class="btn" type="submit" data-i18n="form.submit">Submit</button>
                                         </form>
                                         <div id="form-messages" class="mt-3"></div>
                                     </div>
@@ -329,6 +405,8 @@
             <div class="text-right">
                 <ul class="social-icons">
                     <li><a href="#" title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="#" title="English" class="lang-link active" data-lang="en">EN</a></li>
+                    <li><a href="#" title="Français" class="lang-link" data-lang="fr">FR</a></li>
                 </ul>
             </div>
         </div>
@@ -342,6 +420,7 @@
     <script src="js/jquery.inview.min.js"></script>
     <script src="js/form.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/i18n.js"></script>
 
   </body>
 </html>

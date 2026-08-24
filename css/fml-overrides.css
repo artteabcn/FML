@@ -1,6 +1,79 @@
 /* FML Group additions — kept separate from the theme's own CSS files
    so the original template styling stays fully intact and upgradeable. */
 
+.next-section{
+  bottom:auto;
+  top:100%;
+  margin-top:24px;
+}
+
+.services-list .item{
+  position:relative;
+  overflow:hidden;
+}
+.cluster-illustration{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  opacity:.22;
+  pointer-events:none;
+  transition:opacity .5s ease;
+}
+.services-list .item:hover .cluster-illustration{ opacity:.14; }
+.cluster-illustration svg{ width:100%; height:100%; display:block; }
+.service-box{ position:relative; z-index:1; }
+
+.hero-illustration{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  opacity:.35;
+  pointer-events:none;
+}
+.hero-illustration svg{ width:100%; height:100%; display:block; }
+#video .counter-box{
+  padding-left:8px;
+  padding-right:8px;
+}
+.fact-label{
+  display:block;
+  font-size:13px;
+  line-height:1.3;
+  white-space:normal;
+  word-break:break-word;
+  margin-top:2px;
+}
+
+.legal-box{
+  margin-top:16px;
+  padding:16px 20px;
+  background:rgba(0,0,0,.2);
+  border-radius:10px;
+  font-size:12.5px;
+  line-height:1.7;
+  text-align:left;
+  color:rgba(255,255,255,.75);
+}
+
+.social-icons li a.lang-link{
+  font-family:'Raleway', sans-serif;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.04em;
+}
+.social-icons li a.lang-link.active{
+  background:linear-gradient(90deg, #4096ee, #39ced6);
+  color:#fff;
+}
+@media (max-width:768px){
+  .social-icons li a.lang-link{
+    width:34px;
+    font-size:11px;
+  }
+}
+
+.welcome-box{ position:relative; z-index:2; }
+
 .gallery-list .item{
   width:100%;
 }
