@@ -219,6 +219,24 @@
 .gallery-list .item{
   width:100%;
 }
+.portfolio-item{
+  position:relative;
+}
+.portfolio-item .thumb-inner{
+  background-color: rgba(20,21,23,.55);
+}
+.portfolio-item .thumb-inner h4{
+  color:#fff;
+}
+.portfolio-item:hover .thumb-inner{
+  background-color: rgba(20,21,23,.95);
+}
+.portfolio-item:hover .thumb-inner h4{
+  color:#fff;
+}
+.portfolio-item:hover .thumb-inner p{
+  color:rgba(255,255,255,.8);
+}
 
 .about-contentbox{
   margin-top:0;
