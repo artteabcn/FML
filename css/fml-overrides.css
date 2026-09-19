@@ -309,3 +309,138 @@
   padding:6px 10px;
   border-radius:3px;
 }
+
+/* ============================================================
+   Animation & UX enhancement pass
+   ============================================================ */
+:root{
+  --ease-premium: cubic-bezier(.16,1,.3,1);
+}
+
+#video{
+  overflow:hidden;
+}
+
+/* Breathing brand gradient — same locked colors, slow diagonal drift */
+#video:after{
+  background: linear-gradient(135deg, #4096ee 0%, #39ced6 100%);
+  background-size:220% 220%;
+  animation: fmlGradientDrift 22s ease-in-out infinite;
+}
+@keyframes fmlGradientDrift{
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* Cinematic slow zoom on photographic layers */
+.cluster-photo,
+.hero-photo,
+.illustration-box{
+  animation: fmlKenBurns 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes fmlKenBurns{
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce){
+  .cluster-photo, .hero-photo, .illustration-box, #video:after, .scroll-progress-btn{
+    animation: none !important;
+  }
+}
+
+/* Portfolio card lift on hover (base — JS tilt takes over on fine-pointer devices) */
+.services-list .item{
+  transition: transform .45s var(--ease-premium), box-shadow .45s var(--ease-premium);
+}
+.services-list .item:hover{
+  box-shadow: 0 24px 48px rgba(0,0,0,.35);
+}
+.services-list .item:hover .cluster-photo{
+  animation-play-state: paused;
+  transform: scale(1.14);
+  transition: transform .6s var(--ease-premium);
+}
+
+/* Milestone card lift on hover */
+.gallery-list .portfolio-item{
+  transition: transform .45s var(--ease-premium), box-shadow .45s var(--ease-premium);
+}
+.gallery-list .item:hover .portfolio-item{
+  box-shadow: 0 24px 48px rgba(0,0,0,.35);
+}
+
+/* Nav link animated underline, desktop + mobile dropdown alike */
+.navigation-menu > li > a{
+  position:relative;
+  transition: color .3s ease;
+}
+.navigation-menu > li > a::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  bottom:-6px;
+  width:0;
+  height:2px;
+  background: linear-gradient(90deg,#4096ee,#39ced6);
+  transition: width .35s var(--ease-premium), left .35s var(--ease-premium);
+}
+.navigation-menu > li > a:hover::after,
+.navigation-menu > li.active > a::after{
+  width:100%;
+  left:0;
+}
+
+/* Skill bars: animate fill-in with brand gradient instead of a static white bar */
+.filled-bar,
+.filled-bar-2{
+  background: linear-gradient(90deg, #4096ee, #39ced6) !important;
+  width:0 !important;
+  transition: width 1.3s var(--ease-premium);
+}
+.skills-row.view .filled-bar{ width:64% !important; }
+.skills-row.view .filled-bar-2{ width:82% !important; }
+
+/* Counter icons: gentle scale-in instead of a flat pop */
+.counter-box,
+.service-icon{
+  transition: transform .3s var(--ease-premium);
+}
+.item:hover .counter-box,
+.services-list .item:hover .service-icon{
+  transform: translateY(-2px) scale(1.06);
+}
+
+/* Scroll-to-top button: subtle idle glow pulse, calms on hover/focus */
+.scroll-progress-btn{
+  animation: fmlPulseGlow 2.8s ease-in-out infinite;
+}
+.scroll-progress-btn:hover,
+.scroll-progress-btn:focus-visible{
+  animation: none;
+  box-shadow: 0 0 0 6px rgba(57,206,214,.18);
+}
+@keyframes fmlPulseGlow{
+  0%, 100% { box-shadow: 0 0 0 0 rgba(57,206,214,.35); }
+  50%      { box-shadow: 0 0 0 10px rgba(57,206,214,0); }
+}
+
+/* Language switch: smooth cross-fade when content updates */
+[data-i18n]{
+  transition: opacity .25s ease;
+}
+.fml-i18n-fade{
+  opacity:0 !important;
+}
+
+/* CTA / submit button micro-interaction */
+.contact-section .btn,
+.cta-btn{
+  transition: transform .3s var(--ease-premium), box-shadow .3s var(--ease-premium);
+}
+.contact-section .btn:hover,
+.cta-btn:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(64,150,238,.35);
+}

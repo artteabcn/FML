@@ -113,29 +113,44 @@
     }
   };
 
-  function applyLang(lang) {
+  function applyLang(lang, animate) {
     if (!translations[lang]) return;
     document.documentElement.setAttribute('lang', lang);
 
-    document.querySelectorAll('[data-i18n]').forEach(function (el) {
-      var key = el.getAttribute('data-i18n');
-      if (translations[lang][key] !== undefined) {
-        el.innerHTML = translations[lang][key];
+    var i18nEls = document.querySelectorAll('[data-i18n]');
+
+    function swapContent() {
+      i18nEls.forEach(function (el) {
+        var key = el.getAttribute('data-i18n');
+        if (translations[lang][key] !== undefined) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang][key] !== undefined) {
+          el.setAttribute('placeholder', translations[lang][key]);
+        }
+      });
+
+      document.querySelectorAll('.lang-link').forEach(function (a) {
+        a.classList.toggle('active', a.getAttribute('data-lang') === lang);
+      });
+
+      try { localStorage.setItem('fml-lang', lang); } catch (e) { /* ignore */ }
+
+      if (animate) {
+        i18nEls.forEach(function (el) { el.classList.remove('fml-i18n-fade'); });
       }
-    });
+    }
 
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
-      var key = el.getAttribute('data-i18n-placeholder');
-      if (translations[lang][key] !== undefined) {
-        el.setAttribute('placeholder', translations[lang][key]);
-      }
-    });
-
-    document.querySelectorAll('.lang-link').forEach(function (a) {
-      a.classList.toggle('active', a.getAttribute('data-lang') === lang);
-    });
-
-    try { localStorage.setItem('fml-lang', lang); } catch (e) { /* ignore */ }
+    if (animate) {
+      i18nEls.forEach(function (el) { el.classList.add('fml-i18n-fade'); });
+      setTimeout(swapContent, 180);
+    } else {
+      swapContent();
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -146,7 +161,7 @@
     document.querySelectorAll('.lang-link').forEach(function (a) {
       a.addEventListener('click', function (e) {
         e.preventDefault();
-        applyLang(a.getAttribute('data-lang'));
+        applyLang(a.getAttribute('data-lang'), true);
       });
     });
   });
