@@ -82,8 +82,9 @@
   position:absolute;
   inset:0;
   z-index:0;
-  opacity:.35;
+  opacity:.55;
   pointer-events:none;
+  overflow:hidden;
 }
 .hero-illustration svg{ width:100%; height:100%; display:block; }
 #video .counter-box{
@@ -325,7 +326,7 @@
 #video:after{
   background: linear-gradient(135deg, #4096ee 0%, #39ced6 100%);
   background-size:220% 220%;
-  animation: fmlGradientDrift 22s ease-in-out infinite;
+  animation: fmlGradientDrift 7s ease-in-out infinite;
 }
 @keyframes fmlGradientDrift{
   0%   { background-position: 0% 0%; }
@@ -337,7 +338,7 @@
 .cluster-photo,
 .hero-photo,
 .illustration-box{
-  animation: fmlKenBurns 24s ease-in-out infinite alternate;
+  animation: fmlKenBurns 9s ease-in-out infinite alternate;
   will-change: transform;
 }
 @keyframes fmlKenBurns{
@@ -443,4 +444,50 @@
 .cta-btn:hover{
   transform: translateY(-3px);
   box-shadow: 0 14px 28px rgba(64,150,238,.35);
+}
+
+/* ============================================================
+   Visible motion pass — flowing line, bobbing waves, light streaks
+   (persistent background layer, visible behind every section)
+   ============================================================ */
+#fmlFinanceLine{
+  animation: fmlDashFlow 1.8s linear infinite;
+}
+@keyframes fmlDashFlow{
+  to { stroke-dashoffset: -48; }
+}
+
+#fmlWaves{
+  animation: fmlWaveBob 5s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes fmlWaveBob{
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(14px); }
+}
+
+.fml-streak{
+  position:absolute;
+  top:0;
+  width:3px;
+  height:100%;
+  background:linear-gradient(180deg, transparent 0%, rgba(255,255,255,.85) 45%, rgba(255,255,255,.85) 55%, transparent 100%);
+  box-shadow: 0 0 16px 2px rgba(255,255,255,.5);
+  opacity:0;
+  animation: fmlStreakSweep 6s ease-in infinite;
+  pointer-events:none;
+}
+.fml-streak-1{ left:-5%; animation-delay:0s; }
+.fml-streak-2{ left:-5%; animation-delay:2.2s; }
+.fml-streak-3{ left:-5%; animation-delay:4.4s; }
+@keyframes fmlStreakSweep{
+  0%   { transform: translateX(0) skewX(-12deg); opacity:0; }
+  8%   { opacity:.9; }
+  85%  { opacity:.9; }
+  100% { transform: translateX(115vw) skewX(-12deg); opacity:0; }
+}
+@media (prefers-reduced-motion: reduce){
+  #fmlFinanceLine, #fmlWaves, .fml-streak{
+    animation: none !important;
+  }
 }

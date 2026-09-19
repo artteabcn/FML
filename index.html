@@ -142,12 +142,18 @@
                     <rect x="1250" y="660" width="65" height="300"/>
                     <rect x="1325" y="720" width="55" height="240"/>
                 </g>
-                <polyline points="60,640 260,560 460,610 660,420 860,500 1080,340 1280,600" fill="none" stroke="#fff" stroke-width="3" opacity=".55" stroke-linecap="round" stroke-linejoin="round"/>
-                <g stroke="#fff" stroke-width="2" fill="none" opacity=".4">
+                <polyline id="fmlFinanceLine" points="60,640 260,560 460,610 660,420 860,500 1080,340 1280,600" fill="none" stroke="#39ced6" stroke-width="3" opacity=".7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="14 10"/>
+                <circle r="7" fill="#fff">
+                    <animateMotion dur="7s" repeatCount="indefinite" path="M60,640 260,560 460,610 660,420 860,500 1080,340 1280,600"/>
+                </circle>
+                <g id="fmlWaves" stroke="#fff" stroke-width="2" fill="none" opacity=".4">
                     <path d="M0 830 Q120 800 240 830 T480 830 T720 830 T960 830 T1200 830 T1440 830"/>
                     <path d="M0 860 Q120 830 240 860 T480 860 T720 860 T960 860 T1200 860 T1440 860"/>
                 </g>
             </svg>
+            <div class="fml-streak fml-streak-1"></div>
+            <div class="fml-streak fml-streak-2"></div>
+            <div class="fml-streak fml-streak-3"></div>
         </div>
 
         <div id="fullpage" class="fullpage-default">
