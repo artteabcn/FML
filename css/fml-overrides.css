@@ -70,7 +70,7 @@
 }
 
 .hero-photo{
-  position:absolute;
+  position:fixed;
   inset:0;
   z-index:-1;
   background-size:cover;
@@ -79,7 +79,7 @@
 }
 
 .hero-illustration{
-  position:absolute;
+  position:fixed;
   inset:0;
   z-index:0;
   opacity:.55;
