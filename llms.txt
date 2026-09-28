@@ -9,6 +9,7 @@ FML Group's three pillars:
 
 ## Company
 
+- Website: https://fml.capital/
 - Legal entity: FML Capital Ltd, Company No. 234759
 - Incorporated: 18 May 2026, Port Louis, Mauritius
 - Structure: Private company limited by shares
@@ -16,12 +17,12 @@ FML Group's three pillars:
 
 ## Pages
 
-- [Home](/index.html): Hero overview of the three pillars
-- [The Group](/index.html#slide02): Company overview and key facts
-- [Portfolio](/index.html#slide03): Finance, Maritime, and Logistique cluster detail
-- [Presence](/index.html#slide04): Locations in Mauritius and West Africa (placeholder pending confirmation)
-- [History](/index.html#slide05): Milestones, including verified incorporation record
-- [Contact](/index.html#slide06): Contact details and legal registration information
+- [Home](https://fml.capital/): Hero overview of the three pillars
+- [The Group](https://fml.capital/#slide02): Company overview and key facts
+- [Portfolio](https://fml.capital/#slide03): Finance, Maritime, and Logistique cluster detail
+- [Presence](https://fml.capital/#slide04): Locations in Mauritius and West Africa (placeholder pending confirmation)
+- [History](https://fml.capital/#slide05): Milestones, including verified incorporation record
+- [Contact](https://fml.capital/#slide06): Contact details and legal registration information
 
 ## Notes for automated readers
 
