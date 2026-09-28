@@ -170,7 +170,15 @@
                         window.FMLUpdateScrollProgress(0, fmlTotalSections);
                     }
                 },
+                onLeave: function (origin, destination, direction) {
+                    if (window.FMLMotion) {
+                        window.FMLMotion.onLeave(origin.index, destination.index, direction);
+                    }
+                },
                 afterLoad: function (origin, destination) {
+                    if (window.FMLMotion) {
+                        window.FMLMotion.afterLoad(destination.index);
+                    }
                     if (window.FMLUpdateScrollProgress) {
                         window.FMLUpdateScrollProgress(destination.index, fmlTotalSections);
                     }

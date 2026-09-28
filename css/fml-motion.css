@@ -1,0 +1,304 @@
+/* ============================================================
+   FML Capital — parallax & motion layer
+   Loaded after fml-overrides.css. All movement uses the
+   individual `translate` property so it composes with the
+   existing Ken Burns / animate.css `transform` animations
+   instead of fighting them. Driven by js/fml-motion.js.
+   ============================================================ */
+
+:root{
+  --fml-ease: cubic-bezier(.16,1,.3,1);
+  --fml-grad: linear-gradient(90deg,#4096ee,#39ced6);
+}
+
+/* ---------- Header: FML CAPITAL wordmark ---------- */
+a#logo{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:.35em;
+  letter-spacing:.14em;
+  font-size:26px;
+  white-space:nowrap;
+}
+#logo .logo-text{
+  position:relative;
+  background:linear-gradient(100deg,#fff 0%,#fff 40%,#9fe6ea 50%,#fff 60%,#fff 100%);
+  background-size:250% 100%;
+  background-position:100% 0;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:fmlLogoShine 6s var(--fml-ease) 1.2s infinite;
+}
+#logo::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  height:2px;
+  width:100%;
+  background:var(--fml-grad);
+  transform-origin:left;
+  transform:scaleX(0);
+  animation:fmlLogoRule 1.1s var(--fml-ease) .4s forwards;
+}
+@keyframes fmlLogoShine{
+  0%, 55% { background-position:100% 0; }
+  85%, 100%{ background-position:-50% 0; }
+}
+@keyframes fmlLogoRule{ to{ transform:scaleX(.42); } }
+#logo:hover::after{ transform:scaleX(1); transition:transform .5s var(--fml-ease); animation:none; }
+@media (max-width:767px){
+  a#logo{ font-size:19px; letter-spacing:.1em; }
+  #logo .logo-text{ background:none; color:#fff; animation:none; }
+}
+
+/* ---------- Journey parallax: fixed background layers ----------
+   Oversized so translating never reveals an edge. */
+.hero-photo{
+  inset:-10vh -8vw;
+  translate: var(--fml-photo-x,0px) var(--fml-photo-y,0px);
+}
+.hero-illustration{
+  inset:-4vh -14vw;
+  translate: var(--fml-ill-x,0px) var(--fml-ill-y,0px);
+}
+.hero-illustration .fml-streak{
+  translate: var(--fml-streak-x,0px) 0;
+}
+
+/* Cursor spotlight — a soft teal glow that trails the pointer */
+.fml-spotlight{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:radial-gradient(520px circle at var(--fml-cx,50%) var(--fml-cy,40%), rgba(57,206,214,.16), transparent 62%);
+  opacity:0;
+  transition:opacity .8s ease;
+  mix-blend-mode:screen;
+}
+.fml-has-pointer .fml-spotlight{ opacity:1; }
+
+/* Hero text floats on its own plane */
+.welcome-box{
+  translate: var(--fml-hero-x,0px) var(--fml-hero-y,0px);
+}
+
+/* ---------- Hero title: letter-by-letter rise ---------- */
+.welcome-title.fml-split{ perspective:800px; }
+.welcome-title .fml-char{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(.55em) rotateX(-70deg);
+  transform-origin:50% 100%;
+  transition:opacity .7s var(--fml-ease), transform 1s var(--fml-ease);
+  transition-delay:calc(var(--i) * 45ms + 150ms);
+}
+.welcome-title .fml-space{ display:inline-block; width:.28em; }
+.welcome-title span.fml-char,
+.welcome-title span.fml-space{
+  font-size:inherit;
+  font-weight:inherit;
+  line-height:inherit;
+  display:inline-block;
+}
+.fml-ready .welcome-title .fml-char{
+  opacity:1;
+  transform:none;
+}
+/* gradient sheen that sweeps the title once it has landed */
+.welcome-title.fml-split{
+  background:linear-gradient(100deg,#fff 0%,#fff 42%,#b8f1f4 50%,#fff 58%,#fff 100%);
+  background-size:260% 100%;
+  background-position:100% 0;
+  -webkit-background-clip:text;
+  background-clip:text;
+}
+.welcome-title.fml-split .fml-char{ color:transparent; }
+.fml-ready .welcome-title.fml-split{
+  animation:fmlTitleSheen 2.4s var(--fml-ease) 1.1s both;
+}
+@keyframes fmlTitleSheen{ to{ background-position:-60% 0; } }
+
+/* Eyebrow line draws in beside the hero eyebrow */
+.welcome-first{ position:relative; display:inline-block !important; }
+.welcome-first::after{
+  content:'';
+  position:absolute;
+  left:calc(100% + 18px);
+  top:50%;
+  height:1px;
+  width:0;
+  background:var(--fml-grad);
+  transition:width 1.2s var(--fml-ease) .9s;
+}
+.fml-ready .welcome-first::after{ width:80px; }
+
+/* Scroll cue at the bottom of the hero */
+.fml-scroll-cue{
+  position:absolute;
+  left:50%;
+  bottom:34px;
+  translate:-50% 0;
+  z-index:3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  font-family:'Raleway',sans-serif;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.7);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .8s ease 1.8s;
+}
+.fml-ready .fml-scroll-cue{ opacity:1; }
+.fml-scroll-cue i{
+  display:block;
+  width:1px;
+  height:46px;
+  background:linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,.9));
+  overflow:hidden;
+  position:relative;
+}
+.fml-scroll-cue i::after{
+  content:'';
+  position:absolute;
+  left:0; top:-40%;
+  width:100%; height:40%;
+  background:#39ced6;
+  animation:fmlCue 1.8s var(--fml-ease) infinite;
+}
+@keyframes fmlCue{ to{ top:110%; } }
+.fml-past-hero .fml-scroll-cue{ opacity:0; transition-delay:0s; }
+
+/* ---------- Section headings: masked wipe-in ---------- */
+.fml-motion .title-block h2,
+.fml-motion .about-contentbox h2{
+  clip-path:inset(0 100% 0 0);
+  transition:clip-path 1.1s var(--fml-ease) .15s;
+}
+.fml-in .title-block h2,
+.fml-in .about-contentbox h2{ clip-path:inset(0 0 0 0); }
+
+.title-block span,
+.about-contentbox > div:first-child > span{
+  position:relative;
+  display:inline-block;
+  padding-left:0;
+  transition:padding-left .9s var(--fml-ease) .1s;
+}
+.title-block span::before,
+.about-contentbox > div:first-child > span::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:50%;
+  height:1px;
+  width:0;
+  background:var(--fml-grad);
+  transition:width .9s var(--fml-ease) .1s;
+}
+.fml-in .title-block span,
+.fml-in .about-contentbox > div:first-child > span{ padding-left:44px; }
+.fml-in .title-block span::before,
+.fml-in .about-contentbox > div:first-child > span::before{ width:32px; }
+.title-block{ text-align:inherit; }
+
+/* ---------- Depth layers inside cards ---------- */
+.cluster-photo{
+  inset:-18px;
+  translate: var(--fml-card-x,0px) var(--fml-card-y,0px);
+  transition:translate .6s var(--fml-ease);
+}
+.cluster-illustration{
+  translate: calc(var(--fml-card-x,0px) * -1.6) calc(var(--fml-card-y,0px) * -1.6);
+  transition:translate .6s var(--fml-ease), opacity .5s ease;
+}
+.illustration-box{
+  position:relative;
+  background-size:118% !important;
+  background-position:calc(50% + var(--fml-about-bx,0px)) calc(50% + var(--fml-about-by,0px)) !important;
+  transition:background-position .5s var(--fml-ease);
+}
+.illustration-box svg{
+  translate: var(--fml-about-x,0px) var(--fml-about-y,0px);
+  transition:translate .5s var(--fml-ease);
+}
+
+/* About illustration: financial line draws itself when the section lands */
+.fml-motion .illustration-box polyline{
+  stroke-dasharray:420;
+  stroke-dashoffset:420;
+  transition:stroke-dashoffset 2s var(--fml-ease) .5s;
+}
+.fml-in .illustration-box polyline{ stroke-dashoffset:0; }
+.fml-motion .illustration-box circle{ opacity:0; transition:opacity .5s ease 2.1s; }
+.fml-in .illustration-box circle{ opacity:1; }
+
+/* Portfolio cards: illustration strokes draw in, staggered per card */
+.fml-motion .cluster-illustration svg *{
+  stroke-dasharray:900;
+  stroke-dashoffset:900;
+  transition:stroke-dashoffset 2.2s var(--fml-ease);
+}
+.fml-in .cluster-illustration svg *{ stroke-dashoffset:0; }
+.fml-in .owl-item:nth-child(2) .cluster-illustration svg *{ transition-delay:.15s; }
+.fml-in .owl-item:nth-child(3) .cluster-illustration svg *{ transition-delay:.3s; }
+.fml-in .owl-item:nth-child(4) .cluster-illustration svg *{ transition-delay:.45s; }
+
+/* Milestone year tiles: slow gradient orbit behind the year */
+.milestone-tile{ overflow:hidden; }
+.milestone-tile::after{
+  content:'';
+  position:absolute;
+  width:140%;
+  aspect-ratio:1;
+  left:-20%;
+  top:-60%;
+  background:conic-gradient(from 0deg, rgba(64,150,238,0), rgba(64,150,238,.18), rgba(57,206,214,0) 40%);
+  animation:fmlOrbit 14s linear infinite;
+  pointer-events:none;
+}
+.milestone-tile::before{ position:relative; z-index:1; font-size:34px !important; }
+@keyframes fmlOrbit{ to{ transform:rotate(360deg); } }
+
+/* Presence rows slide in one after another */
+.fml-motion .skill-item{
+  opacity:0;
+  translate:-24px 0;
+  transition:opacity .7s var(--fml-ease), translate .9s var(--fml-ease);
+}
+.fml-in .skill-item{ opacity:1; translate:0 0; }
+.fml-in .skill-item:nth-child(2){ transition-delay:.12s; }
+.fml-in .skill-item:nth-child(3){ transition-delay:.24s; }
+.fml-in .skill-item:nth-child(4){ transition-delay:.36s; }
+
+/* Magnetic submit button */
+.contact-section .btn{ translate: var(--fml-mag-x,0px) var(--fml-mag-y,0px); }
+
+/* ---------- Touch / small screens ---------- */
+@media (max-width:767px), (hover:none){
+  .fml-spotlight{ display:none; }
+}
+@media (max-width:767px){
+  .fml-scroll-cue{ bottom:22px; }
+  .welcome-first::after{ display:none; }
+}
+
+/* ---------- Reduced motion: everything lands in its final state ---------- */
+@media (prefers-reduced-motion: reduce){
+  .hero-photo, .hero-illustration, .welcome-box, .cluster-photo,
+  .cluster-illustration, .illustration-box svg, .contact-section .btn{ translate:none !important; }
+  .welcome-title .fml-char, .skill-item{ opacity:1 !important; transform:none !important; translate:none !important; transition:none !important; }
+  .title-block h2, .about-contentbox h2{ clip-path:none !important; transition:none !important; }
+  .illustration-box polyline, .cluster-illustration svg *{ stroke-dashoffset:0 !important; transition:none !important; }
+  #logo .logo-text, #logo::after, .welcome-title.fml-split, .milestone-tile::after, .fml-scroll-cue i::after{ animation:none !important; }
+  #logo::after{ transform:scaleX(.42); }
+  .fml-spotlight{ display:none; }
+}
