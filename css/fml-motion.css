@@ -11,47 +11,27 @@
   --fml-grad: linear-gradient(90deg,#4096ee,#39ced6);
 }
 
-/* ---------- Header: FML CAPITAL wordmark ---------- */
+/* ---------- Header: FML CAPITAL logo on a white plate ---------- */
 a#logo{
   position:relative;
   display:inline-flex;
   align-items:center;
-  gap:.35em;
-  letter-spacing:.14em;
-  font-size:26px;
-  white-space:nowrap;
+  padding:10px 18px;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,.28);
+  line-height:0;
+  transition:transform .35s var(--fml-ease), box-shadow .35s var(--fml-ease);
+  animation:fmlLogoIn .8s var(--fml-ease) .2s both;
 }
-#logo .logo-text{
-  position:relative;
-  background:linear-gradient(100deg,#fff 0%,#fff 40%,#9fe6ea 50%,#fff 60%,#fff 100%);
-  background-size:250% 100%;
-  background-position:100% 0;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  animation:fmlLogoShine 6s var(--fml-ease) 1.2s infinite;
-}
-#logo::after{
-  content:'';
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  height:2px;
-  width:100%;
-  background:var(--fml-grad);
-  transform-origin:left;
-  transform:scaleX(0);
-  animation:fmlLogoRule 1.1s var(--fml-ease) .4s forwards;
-}
-@keyframes fmlLogoShine{
-  0%, 55% { background-position:100% 0; }
-  85%, 100%{ background-position:-50% 0; }
-}
-@keyframes fmlLogoRule{ to{ transform:scaleX(.42); } }
-#logo:hover::after{ transform:scaleX(1); transition:transform .5s var(--fml-ease); animation:none; }
+a#logo:hover{ transform:translateY(-2px); box-shadow:0 14px 36px rgba(0,0,0,.34); }
+a#logo:focus-visible{ outline:3px solid #9fe6ea; outline-offset:3px; }
+#logo .logo-img{ display:block; height:72px; width:auto; }
+#logo::after{ content:none; }
+@keyframes fmlLogoIn{ from{ opacity:0; transform:translateY(-8px); } to{ opacity:1; transform:none; } }
 @media (max-width:767px){
-  a#logo{ font-size:19px; letter-spacing:.1em; }
-  #logo .logo-text{ background:none; color:#fff; animation:none; }
+  a#logo{ padding:7px 12px; border-radius:10px; }
+  #logo .logo-img{ height:48px; }
 }
 
 /* ---------- Journey parallax: fixed background layers ----------
@@ -298,7 +278,6 @@ a#logo{
   .welcome-title .fml-char, .skill-item{ opacity:1 !important; transform:none !important; translate:none !important; transition:none !important; }
   .title-block h2, .about-contentbox h2{ clip-path:none !important; transition:none !important; }
   .illustration-box polyline, .cluster-illustration svg *{ stroke-dashoffset:0 !important; transition:none !important; }
-  #logo .logo-text, #logo::after, .welcome-title.fml-split, .milestone-tile::after, .fml-scroll-cue i::after{ animation:none !important; }
-  #logo::after{ transform:scaleX(.42); }
+  a#logo, .welcome-title.fml-split, .milestone-tile::after, .fml-scroll-cue i::after{ animation:none !important; }
   .fml-spotlight{ display:none; }
 }
