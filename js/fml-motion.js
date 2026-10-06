@@ -309,6 +309,10 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
   // Reveal the hero once the preloader clears (theme fades it on window load).
-  if (document.readyState === 'complete') setTimeout(reveal, 300);
+  if (window.FMLSplash) {
+    // Reveal as the splash screen lifts.
+    if (window.FMLSplashDone) reveal();
+    else window.addEventListener('fml:splashdone', reveal);
+  } else if (document.readyState === 'complete') setTimeout(reveal, 300);
   else window.addEventListener('load', function () { setTimeout(reveal, 300); });
 })();

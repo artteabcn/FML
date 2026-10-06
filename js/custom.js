@@ -28,7 +28,7 @@
     };
     $(document).ready(function() {
         $(window).on('load', function() {
-            $('.preloader').fadeOut();
+            if (window.FMLSplash) { window.FMLSplash.done(); } else { $('.preloader').fadeOut(); }
             $('.animated-row').each(function() {
                 var $this = $(this);
                 $this.find('.animate').each(function(i) {
