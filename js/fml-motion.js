@@ -15,7 +15,7 @@
 
   root.classList.add('fml-motion');
 
-  var TOTAL = 5;
+  var TOTAL = 6;
   var state = {
     section: 0,        // target section position (float)
     sectionCur: 0,     // eased section position
