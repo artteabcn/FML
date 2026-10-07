@@ -15,7 +15,7 @@
 
   root.classList.add('fml-motion');
 
-  var TOTAL = 6;
+  var TOTAL = 5;
   var state = {
     section: 0,        // target section position (float)
     sectionCur: 0,     // eased section position
@@ -293,7 +293,7 @@
     }
 
     // Counters run when "The Group" section comes in
-    var group = $('[data-section="slide02"]');
+    var group = $('[data-section="slide03"]');
     if (group) {
       new MutationObserver(function () {
         if (group.classList.contains('fml-in')) runCounters();

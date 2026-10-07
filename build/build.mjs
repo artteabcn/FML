@@ -1,0 +1,257 @@
+// Générateur statique de FML CAPITAL — aucune dépendance.
+// Usage : node build/build.mjs   (écrit les pages HTML à la racine du dépôt)
+// Les textes se modifient dans build/content.fr.mjs.
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { site, nav, pages } from "./content.fr.mjs";
+
+const ROOT = process.env.OUT || join(dirname(fileURLToPath(import.meta.url)), "..");
+
+const esc = (s = "") =>
+  String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+const isActive = (href, path) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(href);
+
+// ── Blocs ────────────────────────────────────────────────────────────────
+function renderBlock(b) {
+  switch (b.t) {
+    case "h2":
+      return `<h2 class="section-title">${esc(b.text)}</h2>`;
+    case "p":
+      return `<p class="body-text">${esc(b.text)}</p>`;
+    case "list":
+      return `<ul class="check-list">${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>`;
+    case "panel": {
+      const link = b.link
+        ? `<p><a class="text-link" href="${b.link.href}">${esc(b.link.text)} →</a></p>`
+        : "";
+      return `<section class="panel${b.accent ? " panel-accent" : ""}">
+  ${b.title ? `<h2 class="panel-title">${esc(b.title)}</h2>` : ""}
+  <p>${esc(b.text)}</p>${link}
+</section>`;
+    }
+    case "chips":
+      return `<section class="chips-block">
+  <h2 class="chips-title">${esc(b.title)}</h2>
+  <ul class="chips">${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>
+  ${b.link ? `<p><a class="text-link" href="${b.link.href}">${esc(b.link.text)} →</a></p>` : ""}
+</section>`;
+    case "cards":
+      return `<div class="cards">${b.items
+        .map((c) => {
+          const inner = `${c.eyebrow ? `<span class="eyebrow">${esc(c.eyebrow)}</span>` : ""}
+    <h3>${esc(c.title)}</h3>
+    ${c.text ? `<p>${esc(c.text)}</p>` : ""}
+    ${c.list ? `<ul class="check-list">${c.list.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : ""}
+    ${c.href ? `<span class="card-more">Découvrir →</span>` : ""}`;
+          return c.href
+            ? `<a class="card card-link" href="${c.href}">${inner}</a>`
+            : `<div class="card">${inner}</div>`;
+        })
+        .join("\n")}</div>`;
+    case "actions":
+      return `<p class="actions">${b.links
+        .map((l) => `<a class="text-link" href="${l.href}">${esc(l.text)}</a>`)
+        .join("")}</p>`;
+    case "contact":
+      return `<div class="contact-grid">
+  <section class="panel">
+    <h2 class="panel-title">Coordonnées</h2>
+    <p><a class="text-link" href="mailto:${site.email}">${esc(site.email)}</a></p>
+    <p><a class="text-link" href="tel:${site.phoneHref}">${esc(site.phone)}</a></p>
+    <p>${esc(site.places)}</p>
+    <p class="muted"><a class="text-link" href="/mentions-legales/">Mentions légales</a></p>
+  </section>
+  <form class="panel contact-form" id="contact-form" method="post" action="/api/contact" novalidate>
+    <h2 class="panel-title">Écrire à FML CAPITAL</h2>
+    <label>Nom<input name="name" type="text" autocomplete="name" required></label>
+    <label>Organisation<input name="organisation" type="text" autocomplete="organization"></label>
+    <label>Adresse e-mail<input name="email" type="email" autocomplete="email" required></label>
+    <label>Objet
+      <select name="subject">
+        <option>Finance</option><option>Maritime</option><option>Logistics</option>
+        <option>Conformité</option><option>Autre</option>
+      </select>
+    </label>
+    <label>Message<textarea name="message" rows="6" required></textarea></label>
+    <div class="hp" aria-hidden="true"><label>Ne pas remplir<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+    <button class="btn" type="submit">Envoyer</button>
+    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+  </form>
+</div>`;
+    case "legal":
+      return `<section class="panel">
+  <dl class="facts">
+    <div><dt>Dénomination</dt><dd>${esc(site.legalName)}</dd></div>
+    <div><dt>Company No.</dt><dd>${esc(site.companyNo)}</dd></div>
+    <div><dt>Forme juridique</dt><dd>${esc(site.legalForm)}</dd></div>
+    <div><dt>Pays</dt><dd>Maurice</dd></div>
+  </dl>
+</section>`;
+    default:
+      throw new Error("Bloc inconnu : " + b.t);
+  }
+}
+
+// ── Gabarit commun ───────────────────────────────────────────────────────
+function renderNav(path) {
+  return nav
+    .map((n) => {
+      const cur = isActive(n.href, path) ? ' aria-current="page"' : "";
+      if (!n.children) return `<li><a href="${n.href}"${cur}>${esc(n.label)}</a></li>`;
+      return `<li class="has-sub"><a href="${n.href}"${cur}>${esc(n.label)}</a>
+        <ul class="sub">${n.children
+          .map((c) => `<li><a href="${c.href}"${isActive(c.href, path) ? ' aria-current="page"' : ""}>${esc(c.label)}</a></li>`)
+          .join("")}</ul></li>`;
+    })
+    .join("\n      ");
+}
+
+const jsonLd = () =>
+  JSON.stringify(
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: site.name,
+      legalName: site.legalName,
+      url: site.baseUrl + "/",
+      logo: site.baseUrl + "/images/brand/fml-capital-logo-horizontal-white.svg",
+      email: site.email,
+      telephone: site.phone,
+      description:
+        "Compagnie d’investissement, de structuration financière et de développement de projets internationaux.",
+    },
+    null,
+    2
+  );
+
+function renderPage(p) {
+  const canonical = site.baseUrl + p.path;
+  const crumbs = p.breadcrumb
+    ? `<nav class="crumbs" aria-label="Fil d’Ariane">${p.breadcrumb
+        .map((c) => `<a href="${c.href}">${esc(c.label)}</a>`)
+        .join(" / ")} / <span>${esc(p.h1)}</span></nav>`
+    : "";
+  return `<!doctype html>
+<html lang="${site.lang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(p.title)}</title>
+<meta name="description" content="${esc(p.description)}">
+<link rel="canonical" href="${canonical}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="${esc(site.name)}">
+<meta property="og:title" content="${esc(p.title)}">
+<meta property="og:description" content="${esc(p.description)}">
+<meta property="og:url" content="${canonical}">
+<meta property="og:locale" content="fr_FR">
+<meta name="theme-color" content="#3f86c8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fml-site.css">
+${p.home ? `<script type="application/ld+json">\n${jsonLd()}\n</script>\n` : ""}</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href="/" aria-label="FML CAPITAL — Accueil"><img src="/images/brand/fml-capital-logo-horizontal.svg" alt="FML CAPITAL" width="246" height="92"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span></span><span></span><span></span></button>
+    <nav class="main-nav" id="menu" aria-label="Navigation principale">
+    <ul>
+      ${renderNav(p.path)}
+    </ul>
+    </nav>
+  </div>
+</header>
+<main id="contenu">
+  <section class="hero${p.home ? " hero-home" : ""}">
+    <div class="wrap">
+      ${crumbs}
+      ${p.eyebrow ? `<span class="eyebrow">${esc(p.eyebrow)}</span>` : ""}
+      <h1>${esc(p.h1)}</h1>
+      ${p.lead ? `<p class="lead">${esc(p.lead)}</p>` : ""}
+    </div>
+  </section>
+  <div class="wrap content">
+${p.blocks.map(renderBlock).join("\n")}
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-in">
+    <div>
+      <img src="/images/brand/fml-capital-logo-horizontal-white.svg" alt="FML CAPITAL" width="150" height="57">
+      <p class="muted">${esc(site.signature)}</p>
+    </div>
+    <div>
+      <p><a href="mailto:${site.email}">${esc(site.email)}</a><br><a href="tel:${site.phoneHref}">${esc(site.phone)}</a></p>
+      <p class="muted">${esc(site.places)}</p>
+    </div>
+    <div>
+      <p><a href="/mentions-legales/">Mentions légales</a><br><a href="/contact/">Contact</a></p>
+    </div>
+  </div>
+  <div class="wrap footer-end">© 2026 ${esc(site.legalName)}</div>
+</footer>
+<script src="/js/fml-site.js" defer></script>
+</body>
+</html>
+`;
+}
+
+// ── Écriture ─────────────────────────────────────────────────────────────
+function outFile(path) {
+  return join(ROOT, path.replace(/^\//, ""), path.endsWith("/") ? "index.html" : "");
+}
+
+for (const p of pages) {
+  if (p.home) continue; // la landing page (index.html) est maintenue à la main : ne jamais la régénérer
+  const f = outFile(p.path);
+  mkdirSync(dirname(f), { recursive: true });
+  writeFileSync(f, renderPage(p), "utf8");
+}
+
+const today = new Date().toISOString().slice(0, 10);
+writeFileSync(
+  join(ROOT, "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages
+  .map(
+    (p) => `  <url>
+    <loc>${site.baseUrl}${p.path}</loc>
+    <lastmod>${today}</lastmod>
+  </url>`
+  )
+  .join("\n")}
+</urlset>
+`,
+  "utf8"
+);
+
+writeFileSync(
+  join(ROOT, "llms.txt"),
+  `# FML CAPITAL
+
+> Compagnie d’investissement, de structuration financière et de développement de projets internationaux. Expertise collective au service de projets privés et de partenariats public-privé, avec un socle maritime, pêche et logistique industrielle.
+
+Ancrage : Afrique, notamment Afrique de l’Est et océan Indien. Ouverture au Moyen-Orient et à l’international.
+
+## Pages
+${pages.map((p) => `- [${p.h1}](${site.baseUrl}${p.path}): ${p.description}`).join("\n")}
+
+## Contact
+- ${site.email}
+- ${site.phone}
+- ${site.places}
+`,
+  "utf8"
+);
+
+console.log(`FML CAPITAL : ${pages.filter((p) => !p.home).length} pages internes générées dans ${ROOT} (landing page index.html conservée)`);

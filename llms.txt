@@ -1,31 +1,24 @@
-# FML Group
+# FML CAPITAL
 
-> FML Group is a diversified holding company operating across Finance, Maritime, and Logistique, headquartered in Port Louis, Mauritius, with operations extending into West Africa. This is a prototype/demo website under active development — placeholder content is clearly marked throughout.
+> Compagnie d’investissement, de structuration financière et de développement de projets internationaux. Expertise collective au service de projets privés et de partenariats public-privé, avec un socle maritime, pêche et logistique industrielle.
 
-FML Group's three pillars:
-- **Finance** — Financing and equity investment (Industrie XYZ — name to be confirmed)
-- **Maritime** — Maritime registry (flag XYZ — to be confirmed), fisheries, security and surveillance against illicit market proliferation
-- **Logistique** — Port, mining, and cement freight logistics
-
-## Company
-
-- Website: https://fml.capital/
-- Legal entity: FML Capital Ltd, Company No. 234759
-- Incorporated: 18 May 2026, Port Louis, Mauritius
-- Structure: Private company limited by shares
-- Registrar: Registrar of Companies, Mauritius (CB No. 51147 of 18/05/2026)
+Ancrage : Afrique, notamment Afrique de l’Est et océan Indien. Ouverture au Moyen-Orient et à l’international.
 
 ## Pages
+- [FML CAPITAL](https://fml.capital/): Compagnie d’investissement, de structuration financière et de développement de projets internationaux.
+- [Expertises](https://fml.capital/expertises/): Expertise collective au service de projets privés et de partenariats public-privé, avec un socle maritime, pêche et logistique industrielle.
+- [Structurer et mobiliser les capitaux](https://fml.capital/expertises/finance/): Structuration financière, prises de participation, organisation des véhicules de projet et gouvernance.
+- [Administrer et développer les programmes](https://fml.capital/expertises/maritime/): Deux sous-ensembles distincts : programmes de pavillon et registres maritimes ; programmes nationaux de pêche hauturière et locale.
+- [Pavillons & registres](https://fml.capital/expertises/maritime/pavillons-registres/): Programmes de pavillon et registres maritimes.
+- [Programmes de pêche](https://fml.capital/expertises/maritime/programmes-de-peche/): Programmes nationaux de pêche hauturière et locale.
+- [Piloter la chaîne de valeur industrielle](https://fml.capital/expertises/logistics/): Approvisionnement et débarquement ; gestion d’unités industrielles de pêche ; traitement, transformation et conditionnement ; qualité et traçabilité ; chaîne du froid, stockage, transport et distribution ; accès aux marchés.
+- [Conformité, intégrité et gouvernance](https://fml.capital/conformite-gouvernance/): Vérification des opérateurs et bénéficiaires effectifs, prévention des conflits d’intérêts, traçabilité, suivi des obligations, contrôle des agents, audit et remédiation.
+- [Équipe & réseau d’experts](https://fml.capital/equipe-reseau-experts/): Expertise collective au service de projets privés et de partenariats public-privé.
+- [Projets & références](https://fml.capital/projets-references/): Chaque référence publiée indique le rôle de FML, son périmètre et son avancement.
+- [Contact](https://fml.capital/contact/): Contacter FML CAPITAL.
+- [Mentions légales](https://fml.capital/mentions-legales/): Mentions légales de FML Capital Ltd.
 
-- [Home](https://fml.capital/): Hero overview of the three pillars
-- [The Group](https://fml.capital/#slide02): Company overview and key facts
-- [Portfolio](https://fml.capital/#slide03): Finance, Maritime, and Logistique cluster detail
-- [Presence](https://fml.capital/#slide04): Locations in Mauritius and West Africa (placeholder pending confirmation)
-- [History](https://fml.capital/#slide05): Milestones, including verified incorporation record
-- [Contact](https://fml.capital/#slide06): Contact details and legal registration information
-
-## Notes for automated readers
-
-- This site is bilingual (English/French), toggled client-side via JavaScript — both languages exist within the same HTML document, not separate URLs.
-- Several data points are explicit placeholders pending real content: exact office addresses, phone number, email, industry name ("XYZ"), flag registry name ("XYZ"), and history milestones beyond the 2026 incorporation.
-- Do not treat placeholder figures (e.g., "1994" if encountered in older cached versions) as factual; the only verified figure is the 2026 incorporation date shown above.
+## Contact
+- contact@fml.capital
+- +41 76 264 43 72
+- Port-Louis, Maurice · Zurich, Suisse
