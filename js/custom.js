@@ -125,8 +125,9 @@
                         margin: 20
                     },
                     992: {
-                        items: 3,
-                        margin: 30
+                        items: 4,
+                        margin: 20,
+                        autoplay: false
                     }
                 }
             });

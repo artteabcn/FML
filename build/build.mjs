@@ -87,7 +87,7 @@ function renderBlock(b) {
     <div><dt>Dénomination</dt><dd>${esc(site.legalName)}</dd></div>
     <div><dt>Company No.</dt><dd>${esc(site.companyNo)}</dd></div>
     <div><dt>Forme juridique</dt><dd>${esc(site.legalForm)}</dd></div>
-    <div><dt>Pays</dt><dd>Maurice</dd></div>
+    <div><dt>Pays</dt><dd>Île Maurice</dd></div>
   </dl>
 </section>`;
     default:

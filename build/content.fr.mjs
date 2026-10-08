@@ -11,7 +11,7 @@ export const site = {
   email: "contact@fml.capital",
   phone: "+41 76 264 43 72",
   phoneHref: "+41762644372",
-  places: "Bureaux : Port-Louis, Maurice · Zurich, Suisse",
+  places: "Bureaux : Port-Louis, Île Maurice · Zurich, Suisse",
   companyNo: "234759",
   legalForm: "Private Company limited by shares",
 };
