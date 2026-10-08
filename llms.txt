@@ -18,6 +18,19 @@ Ancrage : Afrique, notamment Afrique de l’Est et océan Indien. Ouverture au M
 - [Contact](https://fml.capital/contact/): Contacter FML CAPITAL.
 - [Mentions légales](https://fml.capital/mentions-legales/): Mentions légales de FML Capital Ltd.
 
+## Pages (English)
+- [Expertise](https://fml.capital/en/expertises/): Collective expertise serving private projects and public-private partnerships, with a maritime, fishing and industrial logistics foundation.
+- [Structure and mobilise capital](https://fml.capital/en/expertises/finance/): Financial structuring, equity stakes, organisation of project vehicles and governance.
+- [Administer and develop programmes](https://fml.capital/en/expertises/maritime/): Two distinct subsets: flag programmes and maritime registries; national deep-sea and local fishing programmes.
+- [Flags & registries](https://fml.capital/en/expertises/maritime/pavillons-registres/): Flag programmes and maritime registries.
+- [Fishing programmes](https://fml.capital/en/expertises/maritime/programmes-de-peche/): National deep-sea and local fishing programmes.
+- [Run the industrial value chain](https://fml.capital/en/expertises/logistics/): Supply and landing; management of industrial fishing units; processing, transformation and packaging; quality and traceability; cold chain, storage, transport and distribution; market access.
+- [Compliance, integrity and governance](https://fml.capital/en/conformite-gouvernance/): Verification of operators and beneficial owners, prevention of conflicts of interest, traceability, monitoring of obligations, control of agents, audit and remediation.
+- [Team & expert network](https://fml.capital/en/equipe-reseau-experts/): Collective expertise serving private projects and public-private partnerships.
+- [Projects & references](https://fml.capital/en/projets-references/): Each published reference states FML’s role, its scope and its progress.
+- [Contact](https://fml.capital/en/contact/): Contact FML CAPITAL.
+- [Legal notice](https://fml.capital/en/mentions-legales/): Legal notice of FML Capital Ltd.
+
 ## Contact
 - contact@fml.capital
 - +41 76 264 43 72

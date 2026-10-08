@@ -1,5 +1,14 @@
-// FML CAPITAL — menu mobile et formulaire de contact.
+// FML CAPITAL — pages internes : menu mobile, langue FR/EN et formulaire de contact.
 (function () {
+  // Mémorise la langue de la page : la landing page (index.html) la relit pour s’afficher dans la même langue.
+  var pageLang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  try { localStorage.setItem('fml-lang', pageLang); } catch (e) { /* ignore */ }
+  document.querySelectorAll('.lang-switch a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      try { localStorage.setItem('fml-lang', a.getAttribute('data-lang')); } catch (e) { /* ignore */ }
+    });
+  });
+
   var toggle = document.querySelector('.nav-toggle');
   var menu = document.getElementById('menu');
   if (toggle && menu) {
@@ -13,9 +22,15 @@
   if (!form) return;
   var status = document.getElementById('form-status');
   var btn = form.querySelector('button[type="submit"]');
+  var msg = {
+    missing: form.getAttribute('data-msg-missing') || '',
+    sending: form.getAttribute('data-msg-sending') || '',
+    ok: form.getAttribute('data-msg-ok') || '',
+    fail: form.getAttribute('data-msg-fail') || ''
+  };
 
-  function say(msg, cls) {
-    status.textContent = msg;
+  function say(text, cls) {
+    status.textContent = text;
     status.className = 'form-status ' + (cls || '');
   }
 
@@ -24,11 +39,11 @@
     var data = {};
     new FormData(form).forEach(function (v, k) { data[k] = String(v).trim(); });
     if (!data.name || !data.email || !data.message) {
-      say('Merci de renseigner votre nom, votre adresse e-mail et votre message.', 'err');
+      say(msg.missing, 'err');
       return;
     }
     btn.disabled = true;
-    say('Envoi en cours…');
+    say(msg.sending);
     fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -38,14 +53,12 @@
       .then(function (res) {
         if (res.ok) {
           form.reset();
-          say('Merci, votre message a bien été envoyé.', 'ok');
+          say(msg.ok, 'ok');
         } else {
-          say('L’envoi a échoué. Vous pouvez écrire directement à contact@fml.capital.', 'err');
+          say(msg.fail, 'err');
         }
       })
-      .catch(function () {
-        say('L’envoi a échoué. Vous pouvez écrire directement à contact@fml.capital.', 'err');
-      })
+      .catch(function () { say(msg.fail, 'err'); })
       .then(function () { btn.disabled = false; });
   });
 })();

@@ -17,9 +17,9 @@
       "group.body": "Africa | East Africa &amp; Indian Ocean | Middle East &amp; international",
       "portfolio.eyebrow": "Expertise",
       "portfolio.h2": "Three pillars",
-      "finance.body": "<p class=\"cluster-tagline\"><strong>Structure and mobilise capital</strong></p><ul class=\"sub-list\"><li>Financial structuring</li><li>Equity stakes</li><li>Organisation of project vehicles and governance</li><li>Mobilisation of private investors, financial partners and institutional donors</li><li>Support for fundraising</li></ul><a class=\"service-more\" href=\"/expertises/finance/\">Discover →</a>",
-      "maritime.body": "<p class=\"cluster-tagline\"><strong>Administer and develop programmes</strong></p><ul class=\"sub-list\"><li>Flag programmes and maritime registries</li><li>National deep-sea and local fishing programmes</li><li>Oversight of operators and agents</li><li>Monitoring of obligations and coordination with authorities</li></ul><a class=\"service-more\" href=\"/expertises/maritime/\">Discover →</a>",
-      "logistique.body": "<p class=\"cluster-tagline\"><strong>Run the industrial value chain</strong></p><ul class=\"sub-list\"><li>Supply and landing</li><li>Management of industrial fishing units</li><li>Processing, transformation and packaging</li><li>Quality and traceability</li><li>Cold chain, storage, transport and distribution</li><li>Market access</li></ul><a class=\"service-more\" href=\"/expertises/logistics/\">Discover →</a>",
+      "finance.body": "<p class=\"cluster-tagline\"><strong>Structure and mobilise capital</strong></p><ul class=\"sub-list\"><li>Financial structuring</li><li>Equity stakes</li><li>Organisation of project vehicles and governance</li><li>Mobilisation of private investors, financial partners and institutional donors</li><li>Support for fundraising</li></ul><a class=\"service-more\" href=\"/en/expertises/finance/\">Discover →</a>",
+      "maritime.body": "<p class=\"cluster-tagline\"><strong>Administer and develop programmes</strong></p><ul class=\"sub-list\"><li>Flag programmes and maritime registries</li><li>National deep-sea and local fishing programmes</li><li>Oversight of operators and agents</li><li>Monitoring of obligations and coordination with authorities</li></ul><a class=\"service-more\" href=\"/en/expertises/maritime/\">Discover →</a>",
+      "logistique.body": "<p class=\"cluster-tagline\"><strong>Run the industrial value chain</strong></p><ul class=\"sub-list\"><li>Supply and landing</li><li>Management of industrial fishing units</li><li>Processing, transformation and packaging</li><li>Quality and traceability</li><li>Cold chain, storage, transport and distribution</li><li>Market access</li></ul><a class=\"service-more\" href=\"/en/expertises/logistics/\">Discover →</a>",
       "presence.eyebrow": "Presence",
       "presence.h2": "USA · Switzerland · Mauritius",
       "presence.l1": "New York, USA",
@@ -115,6 +115,11 @@
         a.classList.toggle('active', a.getAttribute('data-lang') === lang);
       });
 
+      // Liens vers les pages internes : version FR (/…) ou EN (/en/…) selon la langue active.
+      document.querySelectorAll('[data-href-fr]').forEach(function (a) {
+        a.setAttribute('href', lang === 'en' ? a.getAttribute('data-href-en') : a.getAttribute('data-href-fr'));
+      });
+
       try { localStorage.setItem('fml-lang', lang); } catch (e) { /* ignore */ }
 
       if (animate) {
@@ -133,7 +138,8 @@
   document.addEventListener('DOMContentLoaded', function () {
     var saved = null;
     try { saved = localStorage.getItem('fml-lang'); } catch (e) { /* ignore */ }
-    applyLang(saved === 'en' ? 'en' : 'fr');
+    var fromUrl = (location.search.match(/[?&]lang=(en|fr)\b/) || [])[1]; // ex. /en/ redirige vers /?lang=en
+    applyLang(fromUrl || (saved === 'en' ? 'en' : 'fr'));
 
     document.querySelectorAll('.lang-link').forEach(function (a) {
       a.addEventListener('click', function (e) {

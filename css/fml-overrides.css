@@ -530,7 +530,7 @@
 
 /* ---------- Mobile : 3 piliers lisibles, sélecteur de langue hors du contenu ---------- */
 @media (max-width:767px){
-  #social-icons{ top:28px; bottom:auto; left:auto; right:66px; transform:none; z-index:1000; }
+  #social-icons{ top:28px; bottom:auto; left:auto; right:66px; transform:none; z-index:7000; }
   #social-icons .social-icons{ display:flex; gap:2px; }
   #social-icons .social-icons li{ margin:0; }
   #social-icons .social-icons li a{ height:36px; line-height:36px; }

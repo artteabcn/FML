@@ -5,7 +5,7 @@ Double-cliquer sur `lancer-local.bat` : génère les pages puis ouvre http://loc
 (Wrangler si disponible — les fonctions Cloudflare, dont `/api/contact`, tournent aussi en local ; sinon un simple serveur Python).
 
 ## Modifier un texte
-1. Éditer `build/content.fr.mjs` (tous les textes FR, les menus, les coordonnées).
+1. Éditer `build/content.fr.mjs` (textes FR, source) et `build/content.en.mjs` (brouillon EN, mêmes pages dans le même ordre). La landing (`index.html`, textes dans `js/i18n.js`) se modifie à la main.
 2. Relancer `node build/build.mjs` (ou `lancer-local.bat`) : les pages HTML sont régénérées.
 Ne pas éditer les `index.html` à la main : ils sont écrasés à chaque génération.
 
