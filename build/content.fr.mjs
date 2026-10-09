@@ -387,7 +387,7 @@ export const ui = {
   fOk: "Merci, votre message a bien été envoyé.",
   fFail: "L’envoi a échoué. Vous pouvez écrire directement à contact@fml.capital.",
   legalName: "Dénomination",
-  legalNo: "Company No.",
+  legalNo: "N° de société",
   legalFormLabel: "Forme juridique",
   legalCountry: "Pays",
   legalCountryValue: "Île Maurice",

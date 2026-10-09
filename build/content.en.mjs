@@ -1,5 +1,5 @@
-// English content of FML CAPITAL — DRAFT translation of content.fr.mjs (French is the source of truth).
-// To be validated with the FR/EN glossary. Same page order as the French file (home page excluded).
+// English content of FML CAPITAL — translation of content.fr.mjs (French is the source of truth).
+// Same page order as the French file (home page excluded).
 // To edit a text: edit this file, then run `node build/build.mjs`.
 
 export const site = {
