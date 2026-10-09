@@ -568,3 +568,17 @@
   background:linear-gradient(180deg, rgba(20,60,90,.10) 0%, rgba(20,45,65,.55) 100%);
   animation:none;
 }
+
+
+/* ── Textes v3 (9 oct. 2026) : paragraphes des piliers, intro d’expertise, intro conformité ── */
+.cluster-text{ font-size:14px; line-height:1.55; margin:0 0 10px; text-align:left; }
+.cluster-skills{ font-size:13px; line-height:1.5; margin:0 0 6px; text-align:left; opacity:.92; }
+.cluster-skills span{ display:block; font-size:11px; letter-spacing:.12em; text-transform:uppercase; opacity:.7; margin-bottom:2px; }
+.group-intro{ margin:0 0 14px; }
+.section-intro{ max-width:760px; margin:12px auto 0; font-size:15px; line-height:1.6; text-align:center; }
+@media (max-width:767px){
+  .cluster-text{ font-size:13.5px; line-height:1.45; margin-bottom:8px; }
+  .cluster-skills{ font-size:12.5px; line-height:1.4; }
+  .group-intro{ font-size:14.5px; line-height:1.5; }
+  .section-intro{ font-size:13.5px; line-height:1.45; margin-top:8px; }
+}

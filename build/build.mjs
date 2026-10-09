@@ -7,11 +7,12 @@ import { fileURLToPath } from "node:url";
 import * as FR from "./content.fr.mjs";
 import * as EN from "./content.en.mjs";
 
-const pages = FR.pages; // FR : source (inclut l’entrée « home », utilisée seulement pour sitemap / llms.txt)
+const live = (p) => !p.draft; // pages « draft » : conservées dans le contenu mais ni générées, ni dans le sitemap, ni dans llms.txt
+const pages = FR.pages.filter(live); // FR : source (inclut l’entrée « home », utilisée seulement pour sitemap / llms.txt)
 const site = FR.site;
 const LANGS = {
-  fr: { site: FR.site, nav: FR.nav, ui: FR.ui, pages: FR.pages.filter((p) => !p.home), lang: "fr" },
-  en: { site: EN.site, nav: EN.nav, ui: EN.ui, pages: EN.pages, lang: "en" },
+  fr: { site: FR.site, nav: FR.nav, ui: FR.ui, pages: FR.pages.filter((p) => !p.home && live(p)), lang: "fr" },
+  en: { site: EN.site, nav: EN.nav, ui: EN.ui, pages: EN.pages.filter(live), lang: "en" },
 };
 // Correspondance FR ↔ EN par position (mêmes pages, même ordre, accueil exclu)
 const altOf = (lang, i) => LANGS[lang === "fr" ? "en" : "fr"].pages[i];
@@ -132,7 +133,7 @@ const jsonLd = () =>
       email: site.email,
       telephone: site.phone,
       description:
-        "Compagnie d’investissement, de structuration financière et de développement de projets internationaux.",
+        "Investir, structurer et développer des projets internationaux.",
     },
     null,
     2
@@ -277,7 +278,7 @@ writeFileSync(
   join(ROOT, "llms.txt"),
   `# FML CAPITAL
 
-> Compagnie d’investissement, de structuration financière et de développement de projets internationaux. Expertise collective au service de projets privés et de partenariats public-privé, avec un socle maritime, pêche et logistique industrielle.
+> Investir, structurer et développer des projets internationaux. FML Capital réunit des compétences financières, maritimes et industrielles pour accompagner des projets privés et des partenariats public-privé.
 
 Ancrage : Afrique, notamment Afrique de l’Est et océan Indien. Ouverture au Moyen-Orient et à l’international.
 

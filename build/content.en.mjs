@@ -28,8 +28,7 @@ export const nav = [
     ],
   },
   { href: "/en/conformite-gouvernance/", label: "Compliance & governance" },
-  { href: "/en/equipe-reseau-experts/", label: "Team & expert network" },
-  { href: "/en/projets-references/", label: "Projects & references" },
+  // "Team & expert network" and "Projects & references": removed from the menu until there is real content (pages marked `draft: true` below).
   { href: "/en/contact/", label: "Contact" },
 ];
 
@@ -43,6 +42,27 @@ const ROLE_MARITIME =
 
 const COMPLIANCE_LINK = { href: "/en/conformite-gouvernance/", text: "Compliance & governance" };
 
+
+// ── Text proposals (review of 9 October 2026) — English DRAFT aligned on the French texts ──
+const ACC_TAGLINE = "Invest, structure and develop international projects.";
+const ACC_P =
+  "FML Capital brings together financial, maritime and industrial skills to support private projects and public-private partnerships. Our approach combines project structuring, mobilisation of partners and coordination of the expertise needed for their development.";
+const FIN_P =
+  "We support the financial structuring of projects, the organisation of equity stakes and the mobilisation of financial partners. Our work combines investment, governance and the search for financing suited to the needs of the project.";
+const FIN_SK = ["Financial structuring", "Equity stakes and project vehicles", "Mobilisation of capital"];
+const MAR_P =
+  "Our expertise covers flag programmes, maritime registries and national fishing programmes. We support their administrative organisation, the oversight of operators and the coordination of partners, with respect for the responsibilities of the competent authorities.";
+const MAR_SK = ["Flags and registries", "Fishing programmes", "Monitoring of operators and obligations"];
+const LOG_P =
+  "We organise the industrial and logistics chains linked to fishing: supply, processing, packaging, preservation and distribution. Direct operations and partnerships are arranged according to the scope of each project, with attention to quality, traceability and the valorisation of products.";
+const LOG_SK = ["Industrial management", "Cold chain and flows", "Market access"];
+const LOG_IND =
+  "Our expertise relies in particular on the ownership and management of an industrial fishing unit."; // no location
+const CONF_P =
+  "Compliance and governance frame our approach to projects: verification of stakeholders, monitoring of obligations and handling of non-compliance. Responsibilities are defined according to the applicable mandates and supervision arrangements.";
+const T_FIN = "Structure and mobilise capital";
+const T_MAR = "Organise programmes and their administration";
+const T_LOG = "Connect industry to markets";
 export const pages = [
   // 2. Expertise (hub)
   {
@@ -57,24 +77,9 @@ export const pages = [
       {
         t: "cards",
         items: [
-          {
-            eyebrow: "01 FINANCE",
-            title: "Structure and mobilise capital",
-            text: "Financial structuring, equity stakes, organisation of project vehicles and governance.",
-            href: "/en/expertises/finance/",
-          },
-          {
-            eyebrow: "02 MARITIME",
-            title: "Administer and develop programmes",
-            text: "Two distinct subsets: flag programmes and maritime registries; national deep-sea and local fishing programmes.",
-            href: "/en/expertises/maritime/",
-          },
-          {
-            eyebrow: "03 LOGISTICS",
-            title: "Run the industrial value chain",
-            text: "Supply and landing; management of industrial fishing units; processing, transformation and packaging; quality and traceability; cold chain, storage, transport and distribution; market access.",
-            href: "/en/expertises/logistics/",
-          },
+          { eyebrow: "01 FINANCE", title: T_FIN, text: FIN_P, href: "/en/expertises/finance/" },
+          { eyebrow: "02 MARITIME", title: T_MAR, text: MAR_P, href: "/en/expertises/maritime/" },
+          { eyebrow: "03 LOGISTICS", title: T_LOG, text: LOG_P, href: "/en/expertises/logistics/" },
         ],
       },
     ],
@@ -85,12 +90,13 @@ export const pages = [
     path: "/en/expertises/finance/",
     title: "Finance — FML CAPITAL",
     description:
-      "Financial structuring, equity stakes, organisation of project vehicles and governance.",
+      "Financial structuring of projects, organisation of equity stakes and mobilisation of financial partners.",
     breadcrumb: [{ href: "/en/expertises/", label: "Expertise" }],
     eyebrow: "01 FINANCE",
-    h1: "Structure and mobilise capital",
-    lead: "Financial structuring, equity stakes, organisation of project vehicles and governance.",
+    h1: T_FIN,
+    lead: FIN_P,
     blocks: [
+      { t: "chips", title: "Skills", items: FIN_SK },
       {
         t: "p",
         text: "Mobilisation of private investors, financial partners and institutional donors; support for fundraising.",
@@ -118,11 +124,11 @@ export const pages = [
     path: "/en/expertises/maritime/",
     title: "Maritime — FML CAPITAL",
     description:
-      "Two distinct subsets: flag programmes and maritime registries; national deep-sea and local fishing programmes.",
+      "Flag programmes, maritime registries and national fishing programmes: administrative organisation, oversight of operators and coordination of partners.",
     breadcrumb: [{ href: "/en/expertises/", label: "Expertise" }],
     eyebrow: "02 MARITIME",
-    h1: "Administer and develop programmes",
-    lead: "Two distinct subsets: flag programmes and maritime registries; national deep-sea and local fishing programmes.",
+    h1: T_MAR,
+    lead: MAR_P,
     blocks: [
       {
         t: "cards",
@@ -141,8 +147,7 @@ export const pages = [
           },
         ],
       },
-      { t: "h2", text: "Role of FML" },
-      { t: "p", text: ROLE_MARITIME },
+      { t: "chips", title: "Skills", items: MAR_SK },
       {
         t: "panel",
         title: "Separation of roles",
@@ -210,11 +215,13 @@ export const pages = [
     path: "/en/expertises/logistics/",
     title: "Logistics — FML CAPITAL",
     description:
-      "Supply and landing; management of industrial fishing units; processing, transformation and packaging; quality and traceability; cold chain, storage, transport and distribution; market access.",
+      "Industrial and logistics chains linked to fishing: supply, processing, packaging, preservation and distribution.",
     breadcrumb: [{ href: "/en/expertises/", label: "Expertise" }],
     eyebrow: "03 LOGISTICS",
-    h1: "Run the industrial value chain",
+    h1: T_LOG,
+    lead: LOG_P,
     blocks: [
+      { t: "chips", title: "Skills", items: LOG_SK },
       {
         t: "list",
         items: [
@@ -226,11 +233,7 @@ export const pages = [
           "Market access",
         ],
       },
-      { t: "panel", text: "Industrial assets owned and managed by FML." },
-      {
-        t: "p",
-        text: "These functions are operated directly by FML, across the entire chain it owns.",
-      },
+      { t: "panel", text: LOG_IND },
       {
         t: "chips",
         title: "Compliance in this pillar",
@@ -246,10 +249,10 @@ export const pages = [
     path: "/en/conformite-gouvernance/",
     title: "Compliance & governance — FML CAPITAL",
     description:
-      "Verification of operators and beneficial owners, prevention of conflicts of interest, traceability, monitoring of obligations, control of agents, audit and remediation.",
-    eyebrow: "Cross-cutting axis",
+      "Verification of stakeholders, monitoring of obligations and handling of non-compliance.",
+    eyebrow: "A cross-cutting method",
     h1: "Compliance, integrity and governance",
-    lead: "FML builds these commitments into each of the three pillars: Finance, Maritime and Logistics.",
+    lead: CONF_P,
     blocks: [
       { t: "h2", text: "Measures in place" },
       {
@@ -281,9 +284,10 @@ export const pages = [
     ],
   },
 
-  // 4. Team & expert network
+  // 4. Team & expert network — SET ASIDE (no real content yet)
   {
     path: "/en/equipe-reseau-experts/",
+    draft: true,
     title: "Team & expert network — FML CAPITAL",
     description:
       "Collective expertise serving private projects and public-private partnerships.",
@@ -309,9 +313,10 @@ export const pages = [
     ],
   },
 
-  // 5. Projects & references
+  // 5. Projects & references — SET ASIDE (no real content yet)
   {
     path: "/en/projets-references/",
+    draft: true,
     title: "Projects & references — FML CAPITAL",
     description:
       "Each published reference states FML’s role, its scope and its progress.",
