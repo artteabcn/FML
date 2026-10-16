@@ -11,9 +11,23 @@ export const site = {
   email: "contact@fml.capital",
   phone: "+41 76 264 43 72",
   phoneHref: "+41762644372",
-  places: "Bureaux : Port-Louis, Île Maurice · Zurich, Suisse",
-  companyNo: "234759",
-  legalForm: "Private Company limited by shares",
+  entities: [
+    {
+      name: "FML Capital Ltd",
+      address: ["Ébène", "Île Maurice"],
+      regLabel: "N° de société",
+      reg: "234759",
+      regLine: "N° de société 234759",
+      form: "Private Company limited by shares",
+    },
+    {
+      name: "FML Capital Corporation",
+      address: ["16192 Coastal Highway", "États-Unis"],
+      regLabel: "Numéro d’immatriculation",
+      reg: "10513790",
+      regLine: "Numéro d’immatriculation : 10513790",
+    },
+  ],
 };
 
 export const nav = [
@@ -102,6 +116,7 @@ export const pages = [
   // ───────────── 2.1 Finance
   {
     path: "/expertises/finance/",
+    pillar: true,
     title: "Finance — FML CAPITAL",
     description:
       "Structuration financière des projets, organisation des participations et mobilisation de partenaires financiers.",
@@ -136,6 +151,7 @@ export const pages = [
   // ───────────── 2.2 Maritime (hub)
   {
     path: "/expertises/maritime/",
+    pillar: true,
     title: "Maritime — FML CAPITAL",
     description:
       "Programmes de pavillon, registres maritimes et programmes nationaux de pêche : organisation administrative, encadrement des opérateurs et coordination des partenaires.",
@@ -227,6 +243,7 @@ export const pages = [
   // ───────────── 2.3 Logistics
   {
     path: "/expertises/logistics/",
+    pillar: true,
     title: "Logistics — FML CAPITAL",
     description:
       "Chaînes industrielles et logistiques liées à la pêche : approvisionnement, transformation, conditionnement, conservation et distribution.",
@@ -370,6 +387,8 @@ export const ui = {
   home: "Accueil — FML CAPITAL",
   discover: "Découvrir →",
   langLabel: "Langue",
+  pillarsNav: "Piliers d’expertise",
+  back: "Expertises",
   contactDetails: "Coordonnées",
   legalLink: "Mentions légales",
   contactLink: "Contact",
@@ -387,9 +406,7 @@ export const ui = {
   fOk: "Merci, votre message a bien été envoyé.",
   fFail: "L’envoi a échoué. Vous pouvez écrire directement à contact@fml.capital.",
   legalName: "Dénomination",
-  legalNo: "N° de société",
   legalFormLabel: "Forme juridique",
-  legalCountry: "Pays",
-  legalCountryValue: "Île Maurice",
+  legalAddress: "Adresse",
   ogLocale: "fr_FR",
 };

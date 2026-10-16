@@ -11,9 +11,23 @@ export const site = {
   email: "contact@fml.capital",
   phone: "+41 76 264 43 72",
   phoneHref: "+41762644372",
-  places: "Offices: Port Louis, Mauritius · Zurich, Switzerland",
-  companyNo: "234759",
-  legalForm: "Private Company limited by shares",
+  entities: [
+    {
+      name: "FML Capital Ltd",
+      address: ["Ébène", "Mauritius"],
+      regLabel: "Company No.",
+      reg: "234759",
+      regLine: "Company No. 234759",
+      form: "Private Company limited by shares",
+    },
+    {
+      name: "FML Capital Corporation",
+      address: ["16192 Coastal Highway", "USA"],
+      regLabel: "Registration number",
+      reg: "10513790",
+      regLine: "Registration number: 10513790",
+    },
+  ],
 };
 
 export const nav = [
@@ -88,6 +102,7 @@ export const pages = [
   // 2.1 Finance
   {
     path: "/en/expertises/finance/",
+    pillar: true,
     title: "Finance — FML CAPITAL",
     description:
       "Financial structuring of projects, organisation of equity stakes and mobilisation of financial partners.",
@@ -122,6 +137,7 @@ export const pages = [
   // 2.2 Maritime (hub)
   {
     path: "/en/expertises/maritime/",
+    pillar: true,
     title: "Maritime — FML CAPITAL",
     description:
       "Flag programmes, maritime registries and national fishing programmes: administrative organisation, oversight of operators and coordination of partners.",
@@ -213,6 +229,7 @@ export const pages = [
   // 2.3 Logistics
   {
     path: "/en/expertises/logistics/",
+    pillar: true,
     title: "Logistics — FML CAPITAL",
     description:
       "Industrial and logistics chains linked to fishing: supply, processing, packaging, preservation and distribution.",
@@ -356,6 +373,8 @@ export const ui = {
   home: "Home — FML CAPITAL",
   discover: "Discover →",
   langLabel: "Language",
+  pillarsNav: "Areas of expertise",
+  back: "Expertise",
   contactDetails: "Contact details",
   legalLink: "Legal notice",
   contactLink: "Contact",
@@ -373,9 +392,7 @@ export const ui = {
   fOk: "Thank you, your message has been sent.",
   fFail: "Sending failed. You can write directly to contact@fml.capital.",
   legalName: "Company name",
-  legalNo: "Company No.",
   legalFormLabel: "Legal form",
-  legalCountry: "Country",
-  legalCountryValue: "Mauritius",
+  legalAddress: "Address",
   ogLocale: "en_US",
 };

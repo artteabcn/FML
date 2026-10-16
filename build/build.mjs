@@ -73,7 +73,12 @@ function renderBlock(b, L) {
     <h2 class="panel-title">${esc(ui.contactDetails)}</h2>
     <p><a class="text-link" href="mailto:${site.email}">${esc(site.email)}</a></p>
     <p><a class="text-link" href="tel:${site.phoneHref}">${esc(site.phone)}</a></p>
-    <p>${esc(site.places)}</p>
+    ${site.entities
+      .map(
+        (e) =>
+          `<p class="entity"><strong>${esc(e.name)}</strong><br>${e.address.map(esc).join("<br>")}<br>${esc(e.regLine)}</p>`
+      )
+      .join("\n    ")}
     <p class="muted"><a class="text-link" href="${L.lang === "en" ? "/en" : ""}/mentions-legales/">${esc(ui.legalLink)}</a></p>
   </section>
   <form class="panel contact-form" id="contact-form" method="post" action="/api/contact" novalidate
@@ -94,14 +99,18 @@ function renderBlock(b, L) {
   </form>
 </div>`;
     case "legal":
-      return `<section class="panel">
+      return site.entities
+        .map(
+          (e) => `<section class="panel">
   <dl class="facts">
-    <div><dt>${esc(ui.legalName)}</dt><dd>${esc(site.legalName)}</dd></div>
-    <div><dt>${esc(ui.legalNo)}</dt><dd>${esc(site.companyNo)}</dd></div>
-    <div><dt>${esc(ui.legalFormLabel)}</dt><dd>${esc(site.legalForm)}</dd></div>
-    <div><dt>${esc(ui.legalCountry)}</dt><dd>${esc(ui.legalCountryValue)}</dd></div>
+    <div><dt>${esc(ui.legalName)}</dt><dd>${esc(e.name)}</dd></div>
+    <div><dt>${esc(e.regLabel)}</dt><dd>${esc(e.reg)}</dd></div>
+    ${e.form ? `<div><dt>${esc(ui.legalFormLabel)}</dt><dd>${esc(e.form)}</dd></div>` : ""}
+    <div><dt>${esc(ui.legalAddress)}</dt><dd>${e.address.map(esc).join("<br>")}</dd></div>
   </dl>
-</section>`;
+</section>`
+        )
+        .join("\n");
     default:
       throw new Error("Bloc inconnu : " + b.t);
   }
@@ -145,7 +154,26 @@ function renderPage(p, L, idx) {
   const frPath = L.lang === "fr" ? p.path : alt.path;
   const enPath = L.lang === "en" ? p.path : alt.path;
   const canonical = site.baseUrl + p.path;
-  const crumbs = p.breadcrumb
+  // Pages « pilier » (Finance / Maritime / Logistics) : navigation harmonisée, sans pied de page
+  let pillarTop = "";
+  let pillarBottom = "";
+  if (p.pillar) {
+    const exp = nav.find((n) => n.children);
+    const sibs = exp.children;
+    const i = sibs.findIndex((c) => c.href === p.path);
+    const after = nav.find((n) => n.href.includes("conformite"));
+    const prev = i > 0 ? sibs[i - 1] : { href: exp.href, label: ui.back };
+    const next = i < sibs.length - 1 ? sibs[i + 1] : after;
+    pillarTop = `<nav class="pillar-tabs" aria-label="${esc(ui.pillarsNav)}">
+        <a class="pillar-back" href="${exp.href}">← ${esc(ui.back)}</a>
+        <ul>${sibs.map((c) => `<li><a href="${c.href}"${c.href === p.path ? ' aria-current="page"' : ""}>${esc(c.label)}</a></li>`).join("")}</ul>
+      </nav>`;
+    pillarBottom = `<nav class="pillar-pager" aria-label="${esc(ui.pillarsNav)}">
+    <a class="prev" href="${prev.href}">← ${esc(prev.label)}</a>
+    <a class="next" href="${next.href}">${esc(next.label)} →</a>
+  </nav>`;
+  }
+  const crumbs = p.pillar ? pillarTop : p.breadcrumb
     ? `<nav class="crumbs" aria-label="${esc(ui.crumbs)}">${p.breadcrumb
         .map((c) => `<a href="${c.href}">${esc(c.label)}</a>`)
         .join(" / ")} / <span>${esc(p.h1)}</span></nav>`
@@ -204,9 +232,10 @@ ${p.home ? `<script type="application/ld+json">\n${jsonLd()}\n</script>\n` : ""}
   </section>
   <div class="wrap content">
 ${p.blocks.map((b) => renderBlock(b, L)).join("\n")}
+  ${pillarBottom}
   </div>
 </main>
-<footer class="site-footer">
+${p.pillar ? "" : `<footer class="site-footer">
   <div class="wrap footer-in">
     <div>
       <img src="/images/brand/fml-capital-logo-horizontal-white.svg" alt="FML CAPITAL" width="150" height="57">
@@ -214,14 +243,14 @@ ${p.blocks.map((b) => renderBlock(b, L)).join("\n")}
     </div>
     <div>
       <p><a href="mailto:${site.email}">${esc(site.email)}</a><br><a href="tel:${site.phoneHref}">${esc(site.phone)}</a></p>
-      <p class="muted">${esc(site.places)}</p>
+      <p class="muted">${site.entities.map((e) => `${esc(e.name)} — ${esc(e.address[e.address.length - 1])}`).join("<br>")}</p>
     </div>
     <div>
       <p><a href="${L.lang === "en" ? "/en" : ""}/mentions-legales/">${esc(ui.legalLink)}</a><br><a href="${L.lang === "en" ? "/en" : ""}/contact/">${esc(ui.contactLink)}</a></p>
     </div>
   </div>
   <div class="wrap footer-end">© 2026 ${esc(site.legalName)}</div>
-</footer>
+</footer>`}
 <script src="/js/fml-site.js" defer></script>
 </body>
 </html>
@@ -291,7 +320,7 @@ ${LANGS.en.pages.map((p) => `- [${p.h1}](${site.baseUrl}${p.path}): ${p.descript
 ## Contact
 - ${site.email}
 - ${site.phone}
-- ${site.places}
+${site.entities.map((e) => `- ${e.name} — ${e.address.join(", ")} — ${e.regLine}`).join("\n")}
 `,
   "utf8"
 );
