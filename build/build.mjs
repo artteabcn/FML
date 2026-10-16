@@ -210,8 +210,8 @@ ${p.home ? `<script type="application/ld+json">\n${jsonLd()}\n</script>\n` : ""}
   <div class="wrap header-in">
     <a class="brand" href="/" aria-label="${esc(ui.home)}"><img src="/images/brand/fml-capital-logo-horizontal.svg" alt="FML CAPITAL" width="246" height="92"></a>
     <div class="lang-switch" role="group" aria-label="${esc(ui.langLabel)}">
-      <a href="${frPath}" hreflang="fr" lang="fr" data-lang="fr"${L.lang === "fr" ? ' aria-current="true"' : ""}>FR</a>
       <a href="${enPath}" hreflang="en" lang="en" data-lang="en"${L.lang === "en" ? ' aria-current="true"' : ""}>EN</a>
+      <a href="${frPath}" hreflang="fr" lang="fr" data-lang="fr"${L.lang === "fr" ? ' aria-current="true"' : ""}>FR</a>
     </div>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="${esc(ui.menu)}"><span></span><span></span><span></span></button>
     <nav class="main-nav" id="menu" aria-label="${esc(ui.mainNav)}">
