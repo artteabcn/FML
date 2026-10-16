@@ -25,6 +25,26 @@ const esc = (s = "") =>
 const isActive = (href, path) =>
   href === "/" ? path === "/" : path === href || path.startsWith(href);
 
+
+// ── Visuels des cartes « piliers » (mêmes photos et illustrations que la landing) ──
+const PILLAR_ART = {
+  finance: {
+    photo: "https://images.unsplash.com/photo-1499566727020-881da110a0b0?fm=jpg&q=80&w=1600&auto=format&fit=crop",
+    icon: `<polyline points="3,17 9,11 13,15 21,6"/><polyline points="15,6 21,6 21,12"/>`,
+    art: `<polyline points="20,300 70,250 120,270 170,180 220,210 280,120" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="280" cy="120" r="8" fill="#fff"/><g stroke="#fff" stroke-width="1" opacity=".5"><line x1="0" y1="150" x2="300" y2="150"/><line x1="0" y1="220" x2="300" y2="220"/><line x1="0" y1="290" x2="300" y2="290"/></g>`,
+  },
+  maritime: {
+    photo: "https://images.unsplash.com/photo-1606185540834-d6e7483ee1a4?fm=jpg&q=80&w=1600&auto=format&fit=crop",
+    icon: `<circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="21"/><line x1="8" y1="11" x2="16" y2="11"/><path d="M5 14c0 4 3 7 7 7s7-3 7-7"/>`,
+    art: `<circle cx="230" cy="80" r="30" fill="none" stroke="#fff" stroke-width="2"/><path d="M60 260 L240 260 L215 300 L85 300 Z" fill="none" stroke="#fff" stroke-width="3"/><line x1="150" y1="200" x2="150" y2="260" stroke="#fff" stroke-width="3"/><path d="M150 205 L200 230 L150 230 Z" fill="#fff" opacity=".7"/><g stroke="#fff" stroke-width="2" fill="none" opacity=".6"><path d="M0 330 Q40 315 80 330 T160 330 T240 330 T300 330"/><path d="M0 350 Q40 335 80 350 T160 350 T240 350 T300 350"/></g>`,
+  },
+  logistics: {
+    photo: "https://images.unsplash.com/photo-1601897690942-bcacbad33e55?fm=jpg&q=80&w=1600&auto=format&fit=crop",
+    icon: `<rect x="2" y="7" width="12" height="9"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>`,
+    art: `<line x1="60" y1="40" x2="60" y2="260" stroke="#fff" stroke-width="3"/><line x1="60" y1="60" x2="230" y2="60" stroke="#fff" stroke-width="3"/><line x1="200" y1="60" x2="200" y2="110" stroke="#fff" stroke-width="2"/><rect x="60" y="200" width="50" height="40" fill="none" stroke="#fff" stroke-width="2"/><rect x="115" y="200" width="50" height="40" fill="none" stroke="#fff" stroke-width="2"/><rect x="90" y="155" width="50" height="40" fill="none" stroke="#fff" stroke-width="2"/><line x1="0" y1="260" x2="300" y2="260" stroke="#fff" stroke-width="2" opacity=".6"/>`,
+  },
+};
+
 // ── Blocs ────────────────────────────────────────────────────────────────
 function renderBlock(b, L) {
   const { site, ui } = L;
@@ -50,6 +70,23 @@ function renderBlock(b, L) {
   <ul class="chips">${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>
   ${b.link ? `<p><a class="text-link" href="${b.link.href}">${esc(b.link.text)} →</a></p>` : ""}
 </section>`;
+    case "pillars":
+      return `<div class="pillars">${b.items
+        .map((c) => {
+          const a = PILLAR_ART[c.key];
+          return `<a class="pillar-card" href="${c.href}">
+    <span class="pillar-photo" style="background-image:url('${a.photo}')" aria-hidden="true"></span>
+    <svg class="pillar-art" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${a.art}</svg>
+    <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="url(#pgrad)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${a.icon}</svg>
+    <h3>${esc(c.name)}</h3>
+    <p class="pillar-tag">${esc(c.title)}</p>
+    <p class="pillar-text">${esc(c.text)}</p>
+    <p class="pillar-skills"><span>${esc(ui.skillsLabel)}</span>${c.skills.map(esc).join(" · ")}</p>
+    <span class="pillar-more">${esc(ui.discover)}</span>
+  </a>`;
+        })
+        .join("\n  ")}
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="pgrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4096ee"/><stop offset="1" stop-color="#39ced6"/></linearGradient></defs></svg></div>`;
     case "cards":
       return `<div class="cards">${b.items
         .map((c) => {
@@ -222,10 +259,10 @@ ${p.home ? `<script type="application/ld+json">\n${jsonLd()}\n</script>\n` : ""}
   </div>
 </header>
 <main id="contenu">
-  <section class="hero${p.home ? " hero-home" : ""}">
+  <section class="hero${p.home ? " hero-home" : ""}${p.center ? " hero-center" : ""}">
     <div class="wrap">
       ${crumbs}
-      ${p.eyebrow ? `<span class="eyebrow">${esc(p.eyebrow)}</span>` : ""}
+      ${p.eyebrow && !(p.center && p.eyebrow === p.h1) ? `<span class="eyebrow">${esc(p.eyebrow)}</span>` : ""}
       <h1>${esc(p.h1)}</h1>
       ${p.lead ? `<p class="lead">${esc(p.lead)}</p>` : ""}
     </div>

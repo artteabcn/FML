@@ -81,6 +81,7 @@ export const pages = [
   // 2. Expertise (hub)
   {
     path: "/en/expertises/",
+    center: true,
     title: "Expertise — FML CAPITAL",
     description:
       "Collective expertise serving private projects and public-private partnerships, with a maritime, fishing and industrial logistics foundation.",
@@ -89,11 +90,11 @@ export const pages = [
     lead: "Collective expertise serving private projects and public-private partnerships, with a maritime, fishing and industrial logistics foundation.",
     blocks: [
       {
-        t: "cards",
+        t: "pillars",
         items: [
-          { eyebrow: "01 FINANCE", title: T_FIN, text: FIN_P, href: "/en/expertises/finance/" },
-          { eyebrow: "02 MARITIME", title: T_MAR, text: MAR_P, href: "/en/expertises/maritime/" },
-          { eyebrow: "03 LOGISTICS", title: T_LOG, text: LOG_P, href: "/en/expertises/logistics/" },
+          { key: "finance", name: "Finance", title: T_FIN, text: FIN_P, skills: FIN_SK, href: "/en/expertises/finance/" },
+          { key: "maritime", name: "Maritime", title: T_MAR, text: MAR_P, skills: MAR_SK, href: "/en/expertises/maritime/" },
+          { key: "logistics", name: "Logistics", title: T_LOG, text: LOG_P, skills: LOG_SK, href: "/en/expertises/logistics/" },
         ],
       },
     ],
@@ -373,6 +374,7 @@ export const ui = {
   home: "Home — FML CAPITAL",
   discover: "Discover →",
   langLabel: "Language",
+  skillsLabel: "Skills",
   pillarsNav: "Areas of expertise",
   back: "Expertise",
   contactDetails: "Contact details",
