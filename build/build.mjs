@@ -45,6 +45,14 @@ const PILLAR_ART = {
   },
 };
 
+// ── Photos des tuiles de conformité (mêmes que la landing) ──
+const TILE_PHOTOS = [
+  "https://images.unsplash.com/photo-1516382799247-87df95d790b7?fm=jpg&q=75&w=900&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1641467613990-b74163e280e3?fm=jpg&q=75&w=900&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1748347084012-075796185d56?fm=jpg&q=75&w=900&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1768399808130-abac2a8442e0?fm=jpg&q=75&w=900&auto=format&fit=crop",
+];
+
 // ── Blocs ────────────────────────────────────────────────────────────────
 function renderBlock(b, L) {
   const { site, ui } = L;
@@ -87,6 +95,19 @@ function renderBlock(b, L) {
         })
         .join("\n  ")}
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="pgrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4096ee"/><stop offset="1" stop-color="#39ced6"/></linearGradient></defs></svg></div>`;
+    case "tiles":
+      return `<div class="tiles">${b.items
+        .map(
+          (c, i) => `<article class="tile">
+    <div class="tile-photo" style="background-image:url('${TILE_PHOTOS[i % TILE_PHOTOS.length]}')" role="img" aria-hidden="true"></div>
+    <div class="tile-body">
+      <h3>${esc(c.title)}</h3>
+      ${c.text ? `<p>${esc(c.text)}</p>` : ""}
+      ${c.list ? `<ul class="check-list">${c.list.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+    </div>
+  </article>`
+        )
+        .join("\n  ")}</div>`;
     case "cards":
       return `<div class="cards">${b.items
         .map((c) => {
@@ -258,7 +279,7 @@ ${p.home ? `<script type="application/ld+json">\n${jsonLd()}\n</script>\n` : ""}
     </nav>
   </div>
 </header>
-<main id="contenu">
+<main id="contenu"${p.center ? ' class="page-center"' : ""}>
   <section class="hero${p.home ? " hero-home" : ""}${p.center ? " hero-center" : ""}">
     <div class="wrap">
       ${crumbs}

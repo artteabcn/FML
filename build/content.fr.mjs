@@ -279,6 +279,7 @@ export const pages = [
   // ───────────── 3. Conformité & gouvernance
   {
     path: "/conformite-gouvernance/",
+    center: true,
     title: "Conformité & gouvernance — FML CAPITAL",
     description:
       "Vérification des intervenants, suivi des obligations et traitement des non-conformités.",
@@ -288,7 +289,7 @@ export const pages = [
     blocks: [
       { t: "h2", text: "Dispositifs en place" },
       {
-        t: "cards",
+        t: "tiles",
         items: [
           {
             title: "Prévention",
