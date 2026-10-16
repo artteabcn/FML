@@ -53,6 +53,26 @@ const TILE_PHOTOS = [
   "https://images.unsplash.com/photo-1768399808130-abac2a8442e0?fm=jpg&q=75&w=900&auto=format&fit=crop",
 ];
 
+// ── Décor animé de fond (même univers que la landing : photo, illustration, traînées lumineuses) ──
+const FX_PHOTO = "https://images.unsplash.com/photo-1590496793907-4d66e2994b4d?fm=jpg&q=80&w=2000&auto=format&fit=crop";
+function fxBackground(path) {
+  const key = Object.keys(PILLAR_ART).find((k) => path.includes("/" + k + "/"));
+  const photo = key ? PILLAR_ART[key].photo : FX_PHOTO;
+  return `<div class="fx-bg" aria-hidden="true">
+  <div class="fx-drift"></div>
+  <div class="fx-photo" style="background-image:url('${photo}')"></div>
+  <svg class="fx-art" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <g fill="#fff" opacity=".9"><rect x="60" y="700" width="70" height="260"/><rect x="140" y="620" width="55" height="340"/><rect x="205" y="740" width="60" height="220"/><rect x="1250" y="660" width="65" height="300"/><rect x="1325" y="720" width="55" height="240"/></g>
+    <polyline class="fx-line" points="60,640 260,560 460,610 660,420 860,500 1080,340 1280,600" fill="none" stroke="#39ced6" stroke-width="3" opacity=".7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="14 10"/>
+    <circle r="7" fill="#fff"><animateMotion dur="7s" repeatCount="indefinite" path="M60,640 260,560 460,610 660,420 860,500 1080,340 1280,600"/></circle>
+    <g class="fx-waves" stroke="#fff" stroke-width="2" fill="none" opacity=".4"><path d="M0 830 Q120 800 240 830 T480 830 T720 830 T960 830 T1200 830 T1440 830"/><path d="M0 860 Q120 830 240 860 T480 860 T720 860 T960 860 T1200 860 T1440 860"/></g>
+  </svg>
+  <i class="fx-streak fx-s1"></i><i class="fx-streak fx-s2"></i><i class="fx-streak fx-s3"></i>
+  <div class="fx-spot"></div>
+</div>
+`;
+}
+
 // ── Blocs ────────────────────────────────────────────────────────────────
 function renderBlock(b, L) {
   const { site, ui } = L;
@@ -260,10 +280,11 @@ function renderPage(p, L, idx) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/fml-site.css">
+<link rel="stylesheet" href="/css/fml-site.css?v=fx1">
+<script>(function(d){if(!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("fx");setTimeout(function(){if(!window.__fxOk)d.classList.add("fx-all","fx-ready")},3500)}})(document.documentElement)</script>
 ${p.home ? `<script type="application/ld+json">\n${jsonLd()}\n</script>\n` : ""}</head>
 <body>
-<a class="skip" href="#contenu">${esc(ui.skip)}</a>
+${fxBackground(p.path)}<a class="skip" href="#contenu">${esc(ui.skip)}</a>
 <header class="site-header">
   <div class="wrap header-in">
     <a class="brand" href="/" aria-label="${esc(ui.home)}"><img src="/images/brand/fml-capital-logo-horizontal.svg" alt="FML CAPITAL" width="246" height="92"></a>
@@ -309,7 +330,8 @@ ${p.pillar ? "" : `<footer class="site-footer">
   </div>
   <div class="wrap footer-end">© 2026 ${esc(site.legalName)}</div>
 </footer>`}
-<script src="/js/fml-site.js" defer></script>
+<script src="/js/fml-site.js?v=fx1" defer></script>
+<script src="/js/fml-fx.js?v=fx1" defer></script>
 </body>
 </html>
 `;

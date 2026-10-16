@@ -222,3 +222,91 @@ h1{font-size:clamp(32px,5vw,54px);line-height:1.12;margin:.3em 0 .3em;font-weigh
 @media (max-width:1100px){.tiles{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:600px){.tiles{grid-template-columns:1fr}}
 @media (max-width:600px){.tile-photo{aspect-ratio:16/7}}
+
+
+/* ══════════════════════════════════════════════════════════════
+   Effets de la landing sur les pages intérieures
+   (fond animé, parallaxe, apparitions, inclinaison des cartes)
+   ══════════════════════════════════════════════════════════════ */
+:root{--ease-premium:cubic-bezier(.16,1,.3,1)}
+main,.site-footer{position:relative;z-index:1}
+
+/* ── Fond : dégradé qui respire, photo en parallaxe, illustration, traînées, projecteur ── */
+.fx-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.fx-drift{position:absolute;inset:0;background:linear-gradient(135deg,#4096ee 0%,#39ced6 100%);background-size:220% 220%;animation:fxDrift 9s ease-in-out infinite}
+@keyframes fxDrift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+.fx-photo{position:absolute;inset:-7% 0;opacity:.3;filter:saturate(.85);transform:translate3d(0,var(--py,0px),0);will-change:transform}
+.fx-photo::before{content:"";position:absolute;inset:0;background:inherit;animation:fxKen 14s ease-in-out infinite alternate;will-change:transform}
+@keyframes fxKen{0%{transform:scale(1)}100%{transform:scale(1.12) translate3d(-1.5%,1%,0)}}
+.fx-art{position:absolute;inset:0;width:100%;height:100%;opacity:.42;transform:translate3d(0,calc(var(--py,0px) * .55),0)}
+.fx-line{animation:fxDash 1.8s linear infinite}
+@keyframes fxDash{to{stroke-dashoffset:-48}}
+.fx-waves{animation:fxWave 5s ease-in-out infinite}
+@keyframes fxWave{0%,100%{transform:translateY(0)}50%{transform:translateY(14px)}}
+.fx-streak{position:absolute;top:0;left:-5%;width:3px;height:100%;opacity:0;background:linear-gradient(180deg,transparent 0%,rgba(255,255,255,.85) 45%,rgba(255,255,255,.85) 55%,transparent 100%);box-shadow:0 0 16px 2px rgba(255,255,255,.5);animation:fxStreak 6s ease-in infinite}
+.fx-s2{animation-delay:2.2s}.fx-s3{animation-delay:4.4s}
+@keyframes fxStreak{0%{transform:translateX(0) skewX(-12deg);opacity:0}8%{opacity:.8}85%{opacity:.8}100%{transform:translateX(115vw) skewX(-12deg);opacity:0}}
+.fx-spot{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;background:radial-gradient(520px circle at var(--mx,50%) var(--my,30%),rgba(255,255,255,.2),transparent 60%)}
+.fx-spot-on .fx-spot{opacity:1}
+
+/* Barre de progression de lecture */
+.fx-progress{position:fixed;left:0;top:0;height:3px;width:100%;z-index:80;transform-origin:0 50%;transform:scaleX(var(--p,0));background:linear-gradient(90deg,#fff,#39ced6);pointer-events:none}
+
+/* ── Entrée de page : logo, titre balayé, filet du surtitre ── */
+.fx .brand{animation:fxDrop .9s var(--ease-premium) both}
+@keyframes fxDrop{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:none}}
+.fx .hero h1{clip-path:inset(-10% 100% -10% 0);transform:translateY(14px);opacity:0;transition:clip-path 1.2s var(--ease-premium) .15s,transform 1.2s var(--ease-premium) .15s,opacity .5s ease .15s}
+.fx.fx-ready .hero h1{clip-path:inset(-10% -2% -10% 0);transform:none;opacity:1}
+.fx .eyebrow::before{width:0;transition:width .9s var(--ease-premium) .1s}
+.fx.fx-ready .eyebrow::before{width:32px}
+.hero h1{background:linear-gradient(100deg,#fff 0%,#fff 42%,#d9fbff 50%,#fff 58%,#fff 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:fxSheen 7s ease-in-out 1.6s infinite}
+@keyframes fxSheen{0%,60%,100%{background-position:100% 0}80%{background-position:0% 0}}
+
+/* ── Apparition au défilement ── */
+.fx .fx-r{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease-premium) var(--d,0s),transform .9s var(--ease-premium) var(--d,0s)}
+.fx .fx-r.fx-in,.fx-all .fx-r{opacity:1;transform:none}
+
+/* Titres de section : filet qui se trace */
+.section-title{position:relative;padding-bottom:14px}
+.section-title::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:56px;background:var(--grad);border-radius:2px}
+.page-center .section-title::after{left:50%;margin-left:-28px}
+.fx .section-title::after{width:0;transition:width .9s var(--ease-premium) .25s}
+.fx .section-title.fx-in::after,.fx-all .section-title::after{width:56px}
+
+/* ── Blocs : barre dégradée animée, relief au survol ── */
+.panel{transition:transform .4s var(--ease-premium),border-color .4s,box-shadow .4s}
+.panel:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.45);box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.panel::before{background:linear-gradient(180deg,#4096ee,#39ced6,#4096ee);background-size:100% 220%;animation:fxBar 4.5s linear infinite}
+@keyframes fxBar{to{background-position:0 220%}}
+.card{transition:transform .4s var(--ease-premium),border-color .4s,box-shadow .4s}
+.card:hover{box-shadow:0 18px 40px rgba(0,0,0,.28)}
+
+/* ── Cartes piliers : photo animée, illustration flottante ── */
+.pillar-photo{animation:fxKen 14s ease-in-out infinite alternate;transition:filter .5s ease}
+.pillar-card:hover .pillar-photo{transform:none;filter:saturate(1) brightness(.62)}
+.pillar-art{animation:fxFloat 8s ease-in-out infinite alternate}
+@keyframes fxFloat{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-10px,-12px,0) scale(1.06)}}
+.pillar-icon{transition:transform .5s var(--ease-premium)}
+.pillar-card:hover .pillar-icon{transform:translateY(-4px) scale(1.12)}
+
+/* ── Tuiles de conformité : photo animée + reflet ── */
+.tile-photo{overflow:hidden;isolation:isolate}
+.tile-photo::before{content:"";position:absolute;inset:0;background:inherit;animation:fxKen 12s ease-in-out infinite alternate;z-index:-1}
+.tile-photo::after{z-index:0}
+.tile{position:relative}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);transform:translateX(-120%);transition:transform .9s var(--ease-premium);pointer-events:none}
+.tile:hover::after{transform:translateX(120%)}
+
+/* Cartes inclinables (JS) */
+.fx-tilt{will-change:transform}
+
+@media (prefers-reduced-motion:reduce){
+  .fx-drift,.fx-photo::before,.fx-line,.fx-waves,.fx-streak,.hero h1,.panel::before,.pillar-photo,.pillar-art,.tile-photo::before,.brand{animation:none !important}
+  .fx-streak{display:none}
+  .fx-photo,.fx-art{transform:none !important}
+  .hero h1{background:none;-webkit-text-fill-color:#fff}
+}
+@media (max-width:767px){
+  .fx-photo{opacity:.26}
+  .fx-streak{display:none}
+}
